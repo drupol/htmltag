@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/488a8e933d4b4acfa0f85254125a32f6)](https://app.codacy.com/app/drupol/htmltag?utm_source=github.com&utm_medium=referral&utm_content=drupol/htmltag&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/drupol/htmltag.svg?branch=1.x)](https://travis-ci.org/drupol/htmltag)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drupol/htmltag/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=1.x)[![Code Coverage](https://scrutinizer-ci.com/g/drupol/htmltag/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=1.x)
 
 # HTMLTag
