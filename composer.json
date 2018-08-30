@@ -2,9 +2,6 @@
     "name": "drupol/htmltag",
     "description": "TODO",
     "type": "library",
-    "require": {
-        "drupol/dynamicobjects": "^1.2"
-    },
     "require-dev": {
         "phpspec/phpspec": "^5.0"
     },

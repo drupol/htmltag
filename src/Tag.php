@@ -2,12 +2,10 @@
 
 namespace drupol\htmltag;
 
-use drupol\DynamicObjects\DynamicObject;
-
 /**
  * Class Tag.
  */
-class Tag extends DynamicObject {
+class Tag {
   /**
    * The tag name.
    *
@@ -35,7 +33,7 @@ class Tag extends DynamicObject {
    * @param string $name
    *   The tag name.
    */
-  private function __construct($name) {
+  public function __construct($name) {
     $this->tag = $name;
     $this->attributes = new Attributes();
   }
@@ -46,13 +44,11 @@ class Tag extends DynamicObject {
    *
    * @return \drupol\htmltag\Tag
    */
-  public static function __callStatic($name, array $arguments = array()) {
+  public static function __callStatic($name, $arguments) {
     return new static($name);
   }
 
   /**
-   * Render the tag.
-   *
    * @return string
    */
   public function __toString() {
@@ -97,9 +93,13 @@ class Tag extends DynamicObject {
   }
 
   /**
+   * Get the attributes as string or a specific attribute if $name is provided.
+   *
    * @param null $name
+   *   The name of the attribute.
    *
    * @return string|\drupol\htmltag\Attribute
+   *   The attributes as string or a specific Attribute object.
    */
   public function attr($name = NULL) {
     return $name ?

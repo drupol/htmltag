@@ -2,12 +2,10 @@
 
 namespace drupol\htmltag;
 
-use drupol\DynamicObjects\DynamicObject;
-
 /**
  * Class Attribute.
  */
-class Attribute extends DynamicObject {
+class Attribute {
   /**
    * Store the attribute name.
    *
@@ -33,7 +31,6 @@ class Attribute extends DynamicObject {
   public function __construct($name, $value = NULL) {
     $this->name = trim($name);
     $this->set($value);
-    $this->extend(__DIR__.'/Core/Attribute.php');
   }
 
   /**
@@ -156,6 +153,110 @@ class Attribute extends DynamicObject {
   }
 
   /**
+   * Append a value to the attribute.
+   *
+   * @param string $value
+   *   The value to append.
+   *
+   * @return $this
+   *   The attribute.
+   */
+  public function append($value) {
+    $this->values = array_merge(
+      (array) $this->values,
+      explode(
+        ' ',
+        trim($value)
+      )
+    );
+
+    return $this;
+  }
+
+  /**
+   * Merge data into the attribute value.
+   *
+   * @param array $values
+   *   The values to merge.
+   *
+   * @return $this
+   *   The attribute.
+   */
+  public function merge(array $values) {
+    $this->values = array_merge(
+      (array) $this->values,
+      $values
+    );
+
+    return $this;
+  }
+
+  /**
+   * Remove a value from the attribute.
+   *
+   * @param string $value
+   *   The value to remove.
+   *
+   * @return $this
+   *   The attribute.
+   */
+  public function remove($value) {
+    $this->values = array_filter(
+      (array) $this->values,
+      function ($value_item) use ($value) {
+        return $value_item !== $value;
+      }
+    );
+
+    return $this;
+  }
+
+  /**
+   * Replace a value of the attribute.
+   *
+   * @param string $original
+   *   The original value.
+   * @param string $replacement
+   *   The replacement value.
+   *
+   * @return $this
+   *   The attribute.
+   */
+  public function replace($original, $replacement) {
+    $this->values = array_map(
+      function (&$value_item) use ($original, $replacement) {
+        if ($value_item === $original) {
+          $value_item = $replacement;
+        }
+
+        return $value_item;
+      },
+      (array) $this->values
+    );
+
+    return $this;
+  }
+
+  /**
+   * Check if the attribute contains a string or a substring.
+   *
+   * @param string $substring
+   *   The string to check.
+   *
+   * @return bool
+   *   True or False.
+   */
+  public function contains($substring) {
+    foreach ((array) $this->values as $value_item) {
+      if (FALSE !== strpos($value_item, $substring)) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
+  }
+
+  /**
    * Set the attribute as a loner attribute.
    *
    * @param bool $loner
@@ -172,6 +273,19 @@ class Attribute extends DynamicObject {
     if (FALSE === $loner) {
       $this->values = array();
     }
+
+    return $this;
+  }
+
+  /**
+   * Delete the current attribute.
+   *
+   * @return $this
+   *   The attribute.
+   */
+  public function delete() {
+    $this->name = '';
+    $this->values = NULL;
 
     return $this;
   }

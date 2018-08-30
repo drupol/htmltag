@@ -21,6 +21,19 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
+   * Normalize a value.
+   *
+   * @param mixed $value
+   *  The value to normalize.
+   *
+   * @return array
+   *   The value normalized.
+   */
+  private function normalizeValue($value) {
+    return $this->ensureFlatArray($value);
+  }
+
+  /**
    * Todo.
    *
    * @param mixed $value
@@ -32,7 +45,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   private function ensureFlatArray($value) {
     $type = gettype($value);
 
-    $return = NULL;
+    $return = array();
+
     switch ($type) {
       case 'string':
         $return = explode(
@@ -52,13 +66,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         );
         break;
 
-      case 'object':
-      case 'boolean':
       case 'double':
       case 'integer':
         $return = array($value);
         break;
-
+      case 'object':
+      case 'boolean':
       case 'resource':
       case 'NULL':
     }
@@ -204,26 +217,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $attribute = $this->storage[$key];
     }
 
-    $type = gettype($value);
+    $value = $this->normalizeValue($value);
 
-    switch ($type) {
-      case 'string':
-        $attribute->append($value);
-        break;
-
-      case 'array':
-        foreach ($this->ensureFlatArray($value) as $value_item) {
-          $attribute->append($value_item);
-        }
-
-        break;
-
-      case 'object':
-      case 'boolean':
-      case 'integer':
-      case 'double':
-      case 'resource':
-      case 'NULL':
+    foreach ($value as $value_item) {
+      $attribute->append($value_item);
     }
 
     $this->storage[$key] = $attribute;
@@ -246,30 +243,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return $this;
     }
 
+    $value = $this->normalizeValue($value);
+
     $attribute = $this->storage[$key];
 
-    $type = gettype($value);
-
-    switch ($type) {
-      case 'string':
-        $attribute->remove($value);
-        break;
-
-      case 'array':
-        $value = $this->ensureFlatArray($value);
-
-        foreach ($value as $value_item) {
-          $attribute->remove($value_item);
-        }
-
-        break;
-
-      case 'object':
-      case 'boolean':
-      case 'integer':
-      case 'double':
-      case 'resource':
-      case 'NULL':
+    foreach ($value as $value_item) {
+      $attribute->remove($value_item);
     }
 
     $this->storage[$key] = $attribute;
@@ -286,24 +265,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @return $this
    */
   public function delete($name = array()) {
-    $type = gettype($name);
-
-    switch ($type) {
-      case 'string':
-        $name = array($name);
-        break;
-
-      case 'array':
-        $name = $this->ensureFlatArray($name);
-        break;
-
-      case 'object':
-      case 'boolean':
-      case 'integer':
-      case 'double':
-      case 'resource':
-      case 'NULL':
-    }
+    $name = $this->normalizeValue($name);
 
     foreach ($name as $attribute_name) {
       unset($this->storage[$attribute_name]);
@@ -351,24 +313,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $attribute = $this->storage[$key];
     }
 
-    $type = gettype($replacement);
-
-    switch ($type) {
-      case 'string':
-        $replacement = array($replacement);
-        break;
-
-      case 'array':
-        $replacement = $this->ensureFlatArray($replacement);
-        break;
-
-      case 'object':
-      case 'boolean':
-      case 'integer':
-      case 'double':
-      case 'resource':
-      case 'NULL':
-    }
+    $replacement = $this->normalizeValue($replacement);
 
     $attribute->remove($value);
     foreach ($replacement as $replacement_value) {
@@ -398,7 +343,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       }
 
       $attribute->merge(
-        (array) $value
+        $this->normalizeValue($value)
       );
 
       $this->storage[$key] = $attribute;
@@ -408,7 +353,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * Check if attribute exists.
+   * Check if an attribute exists and if a value if provided check it as well.
    *
    * @param string $key
    *   Attribute name.
@@ -465,35 +410,54 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return '';
     }
 
+    $result = implode(' ', $this->prepareValues());
+
+    return $result ? ' ' . $result : '';
+  }
+
+  /**
+   * Returns all storage elements as an array.
+   *
+   * @return \drupol\htmltag\Attribute[]
+   *   An associative array of attributes.
+   */
+  private function prepareValues() {
+    $attributes = $this->storage;
+
+    // If empty, just return an empty array.
+    if (empty($attributes)) {
+      return array();
+    }
+
     // Sort the attributes.
     ksort($attributes);
 
     $result = [];
 
-    foreach ($attributes as $attribute_name => &$attribute) {
+    foreach ($attributes as $attribute_name => $attribute) {
       switch ($attribute_name) {
         case 'class':
-          $classes = $this->ensureFlatArray($attribute->getValueAsArray());
+          $classes = $attribute->getValueAsArray();
           asort($classes);
-          $result[] = (string) $attribute
+          $result[$attribute->getName()] = $attribute
             ->withValue(
               implode(' ', $classes)
             );
           break;
 
         case 'placeholder':
-          $result[] = (string) $attribute
+          $result[$attribute->getName()] = $attribute
             ->withValue(
               strip_tags($attribute->getValueAsString())
             );
           break;
 
         default:
-          $result[] = (string) $attribute;
+          $result[$attribute->getName()] = $attribute;
       }
     }
 
-    return $attributes ? ' ' . implode(' ', array_filter($result, 'strlen')) : '';
+    return $result;
   }
 
   /**
@@ -510,32 +474,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return array();
     }
 
-    // Sort the attributes.
-    ksort($attributes);
-
     $result = [];
 
-    foreach ($attributes as $attribute_name => &$attribute) {
-      switch ($attribute_name) {
-        case 'class':
-          $classes = $attribute->getValueAsArray();
-          asort($classes);
-          $result[$attribute->getName()] = $attribute
-            ->withValue(
-              implode(' ', $classes)
-            )->getValueAsArray();
-          break;
-
-        case 'placeholder':
-          $result[$attribute->getName()] = $attribute
-            ->withValue(
-              strip_tags($attribute->getValueAsString())
-            )->getValueAsArray();
-          break;
-
-        default:
-          $result[$attribute->getName()] = $attribute->getValueAsArray();
-      }
+    foreach ($this->prepareValues() as $attribute) {
+      $result[$attribute->getName()] = $attribute->getValueAsArray();
     }
 
     return $result;
