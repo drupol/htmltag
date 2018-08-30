@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/drupol/htmltag.svg?branch=1.x)](https://travis-ci.org/drupol/htmltag)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drupol/htmltag/badges/quality-score.png?b=1.x)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=1.x)[![Code Coverage](https://scrutinizer-ci.com/g/drupol/htmltag/badges/coverage.png?b=1.x)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=1.x)
+
 # HTMLTag
 
 A library for creating HTML tags.
@@ -17,7 +19,7 @@ $title->content(['Welcome to HTMLTag']);
 
 /** @var \drupol\htmltag\Tag $paragraph */
 $paragraph = \drupol\htmltag\Tag::p();
-$paragraph->attr('class')->append('section')->append('desc');
+$paragraph->attr('class', 'section')->append('desc');
 $paragraph->content(['This library helps you create HTML.']);
 $paragraph->attr('class')->remove('section')->replace('desc', 'description');
 

@@ -8,25 +8,26 @@ use Prophecy\Argument;
 
 class TagSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
-      $this->beConstructedWith('tag');
-      $this->shouldHaveType(Tag::class);
+        $this->beConstructedWith('tag');
+        $this->shouldHaveType(Tag::class);
     }
 
-    function it_should_create_a_tag() {
-      $this->beConstructedWith('p');
-      $this
+    public function it_should_create_a_tag()
+    {
+        $this->beConstructedWith('p');
+        $this
         ->attr('class')
         ->append('paragraph');
-      $this->__toString()
+        $this->__toString()
         ->shouldBe('<p class="paragraph"/>');
 
-      $subtag = new Tag('b');
-      $subtag->content(['bold text']);
+        $subtag = new Tag('b');
+        $subtag->content(['bold text']);
 
-      $this->content(['hello ', $subtag]);
-      $this
+        $this->content(['hello ', $subtag]);
+        $this
         ->__toString()
         ->shouldBe('<p class="paragraph">hello <b>bold text</b></p>');
     }

@@ -1,0 +1,23 @@
+language: php
+
+git:
+  depth: 1
+
+cache:
+  directories:
+    - $HOME/.cache/composer
+    - $HOME/.composer/cache
+
+php:
+  - 7.1
+  - 7.2
+
+install:
+  - composer install
+
+script:
+  - composer grumphp
+
+after_success:
+  - composer codacy
+  - composer scrutinizer

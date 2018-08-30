@@ -1,0 +1,38 @@
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
+  tasks:
+    phplint: ~
+    yamllint: ~
+    composer: ~
+    phpcpd: ~
+    phpcpd:
+      directory: './src'
+    jsonlint: ~
+    phpcsfixer:
+      config_file: ~
+      config: ~
+      fixers: []
+      level: ~
+      verbose: true
+    phpcs:
+      standard: PSR2
+      ignore_patterns:
+        - vendor/
+        - spec/
+      triggered_by:
+        - php
+        - module
+        - inc
+        - js
+    phpspec:
+        format: pretty
+        stop_on_failure: true
+        verbose: true
+    securitychecker:
+        lockfile: ./composer.lock
+        format: ~
+        end_point: ~
+        timeout: ~
+        run_always: false
+

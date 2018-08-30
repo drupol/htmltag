@@ -7,3 +7,4 @@ node_modules
 /phpunit.xml
 /runner.yml
 test.php
+/.php_cs.cache
