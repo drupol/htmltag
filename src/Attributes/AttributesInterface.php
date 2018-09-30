@@ -143,14 +143,6 @@ interface AttributesInterface extends
     public function contains($key, ...$values);
 
     /**
-     * Returns all storage elements as an array.
-     *
-     * @return AttributeInterface[]
-     *   An associative array of attributes.
-     */
-    public function toArray();
-
-    /**
      * Get storage.
      *
      * @return AttributeInterface[]
