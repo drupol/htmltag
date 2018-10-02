@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="stylesheet" href="resources/bootstrap.min.css">
+        <link rel="stylesheet" href="resources/style.css">
+
+        <title>
+            Class drupol\htmltag\AbstractBaseHtmlTagObject | HTMLTag API documentation
+        </title>
+    </head>
+
+    <body>
+<div id="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="index.html">
+                                HTMLTag API documentation
+                            </a>
+                        </li>
+
+                            <li>
+                                <a href="classes.html">Classes</a>
+                            </li>
+
+                            <li>
+                                <a href="interfaces.html">Interfaces</a>
+                            </li>
+
+
+
+
+                            <li class="separator"></li>
+                            <li>
+                                <a href="annotation-group-todo.html">
+                                    @Todo
+                                </a>
+                            </li>
+                            <li class="separator"></li>
+                            <li>
+                                <a href="annotation-group-deprecated.html">
+                                    @Deprecated
+                                </a>
+                            </li>
+                    </ul>
+
+                    <form id="search" class="pull-right">
+                        <input type="text" name="q" class="form-control text" placeholder="Search class, function or namespace" autofocus>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+            <div id="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+<div class="pull-left type">
+    <span class="label label-success">Class</span>
+</div>
+
+<ol class="breadcrumb pull-left">
+        <li>
+            <a href="namespace-drupol.html">drupol</a>
+        </li>
+            <li class="backslash">\</li>
+        <li>
+            <a href="namespace-drupol.htmltag.html">htmltag</a>
+        </li>
+
+        <li class="backslash">\</li>
+        <li class="active">AbstractBaseHtmlTagObject</li>
+</ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+    <h1>AbstractBaseHtmlTagObject</h1>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                Class AbstractBaseHtmlTagObject
+            </div>
+        </div>
+
+
+
+        <div>
+            <h2>Known subclasses</h2>
+            <a href="class-drupol.htmltag.Attribute.Attribute.html">drupol\htmltag\Attribute\Attribute</a>, 
+            <a href="class-drupol.htmltag.Attributes.Attributes.html">drupol\htmltag\Attributes\Attributes</a>, 
+            <a href="class-drupol.htmltag.Tag.Comment.html">drupol\htmltag\Tag\Comment</a>, 
+            <a href="class-drupol.htmltag.Tag.Tag.html">drupol\htmltag\Tag\Tag</a>
+        </div>
+
+    <div class="info">
+        <strong>Abstract</strong><br>
+
+            <a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html" class="open-source-code">Open source code</a>
+        <br>
+    </div>
+
+        <table class="summary table table-bordered table-responsive table-striped" id="methods">
+            <tr><th colspan="3">Methods Summary</th></tr>
+
+
+
+<tr id="_ensureStrings">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_ensureStrings">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#19-30">ensureStrings</a>( <span> array <span class="property-name">$values</span> </span> )</code>
+
+            <div class="description">
+                Escape values are converted to string.
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr id="_ensureFlatArray">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_ensureFlatArray">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#46-62">ensureFlatArray</a>( <span> array <span class="property-name">$array</span> </span> )</code>
+
+            <div class="description">
+                Transform a multidimensional array into a flat array.
+
+We could use a iterator_to_array() with a custom RecursiveArrayIterator.
+But it seems to be even slower.
+
+
+
+
+
+
+                    <h2>see</h2>
+                    <div class="list">
+                        <a href="http://php.net/manual/en/class.recursivearrayiterator.php#106519">http://php.net/manual/en/class.recursivearrayiterator.php#106519</a><br>
+                    </div>
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr id="_ensureString">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_ensureString">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#73-98">ensureString</a>( <span> mixed <span class="property-name">$data</span> </span> )</code>
+
+            <div class="description">
+                Make sure the value is an array.
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr id="_preprocess">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_preprocess">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#111-114">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> string <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span> )</code>
+
+            <div class="description">
+                Preprocess values before they are returned to user.
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr id="_escape">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                abstract protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_escape">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#125">escape</a>( <span> string|mixed <span class="property-name">$value</span> </span> )</code>
+
+            <div class="description">
+                Sanitize a value.
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+        </table>
+
+
+
+
+
+
+
+    <div id="footer">
+        Generated by <a href="https://github.com/apigen/apigen">ApiGen</a>
+    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="resources/jquery-3.2.1.min.js"></script>
+        <script src="resources/jquery-ui-1.12.1.min.js"></script>
+
+        <script src="elementlist.js"></script>
+        <script src="resources/main.js"></script>
+    </body>
+</html>
+
+
