@@ -94,7 +94,11 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
-                Class AbstractBaseHtmlTagObject
+                Class AbstractBaseHtmlTagObject.
+
+This class is the base class of other HTMLTag objects.
+It contains simple methods that are needed everywhere.
+We could have used a Trait instead, but I don't like working with traits.
             </div>
         </div>
 
@@ -133,10 +137,15 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_ensureStrings">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#19-30">ensureStrings</a>( <span> array <span class="property-name">$values</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#28-39">ensureStrings</a>( <span> array <span class="property-name">$values</span> </span> )</code>
 
             <div class="description">
-                Escape values are converted to string.
+                Make sure that the value parameters is converted into an
+array of strings.
+
+Only simple arrays (no nested arrays) are allowed here.
+Values that cannot be converted to strings will be removed from the
+resulting array.
 
 
 
@@ -165,11 +174,13 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_ensureFlatArray">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#46-62">ensureFlatArray</a>( <span> array <span class="property-name">$array</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#57-73">ensureFlatArray</a>( <span> array <span class="property-name">$array</span> </span> )</code>
 
             <div class="description">
                 Transform a multidimensional array into a flat array.
 
+This method will flatten an array containing arrays.
+Keys will be lost during the flattening.
 We could use a iterator_to_array() with a custom RecursiveArrayIterator.
 But it seems to be even slower.
 
@@ -204,10 +215,13 @@ But it seems to be even slower.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_ensureString">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#73-98">ensureString</a>( <span> mixed <span class="property-name">$data</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#87-112">ensureString</a>( <span> mixed <span class="property-name">$data</span> </span> )</code>
 
             <div class="description">
-                Make sure the value is an array.
+                Convert a value into a string when it's possible.
+
+Ensure that the value gets converted into a string when it is possible.
+When it's not possible, the "null" value is returned instead.
 
 
 
@@ -236,10 +250,13 @@ But it seems to be even slower.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_preprocess">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#111-114">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> string <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#128-131">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> string|null <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span> )</code>
 
             <div class="description">
-                Preprocess values before they are returned to user.
+                Preprocess values before being used.
+
+This is useful when extending the parent class and implementing this
+method.
 
 
 
@@ -268,10 +285,10 @@ But it seems to be even slower.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_escape">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#125">escape</a>( <span> string|mixed <span class="property-name">$value</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#142">escape</a>( <span> string|\drupol\htmltag\StringableInterface <span class="property-name">$value</span> </span> )</code>
 
             <div class="description">
-                Sanitize a value.
+                Escape a value.
 
 
 
