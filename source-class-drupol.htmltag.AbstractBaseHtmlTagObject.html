@@ -116,21 +116,21 @@
 </span></span><span class="l" id="line-48"><span class="php-comment">     *
 </span></span><span class="l" id="line-49"><span class="php-comment">     * @see http://php.net/manual/en/class.recursivearrayiterator.php#106519
 </span></span><span class="l" id="line-50"><span class="php-comment">     *
-</span></span><span class="l" id="line-51"><span class="php-comment">     * @param mixed[] $array
+</span></span><span class="l" id="line-51"><span class="php-comment">     * @param mixed[] $data
 </span></span><span class="l" id="line-52"><span class="php-comment">     *   The input array.
 </span></span><span class="l" id="line-53"><span class="php-comment">     *
 </span></span><span class="l" id="line-54"><span class="php-comment">     * @return mixed[]
 </span></span><span class="l" id="line-55"><span class="php-comment">     *   A simple array.
 </span></span><span class="l" id="line-56"><span class="php-comment">     */</span>
-</span><span class="l" id="line-57">    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> ensureFlatArray(<span class="php-keyword1">array</span> <span class="php-var">$array</span>)
+</span><span class="l" id="line-57">    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> ensureFlatArray(<span class="php-keyword1">array</span> <span class="php-var">$data</span>)
 </span><span class="l" id="line-58">    {
-</span><span class="l" id="line-59">        <span class="php-var">$flat</span> = <span class="php-keyword1">array</span>();
+</span><span class="l" id="line-59">        <span class="php-var">$flat</span> = [];
 </span><span class="l" id="line-60">
-</span><span class="l" id="line-61">        <span class="php-keyword1">while</span> (<span class="php-var">$array</span>) {
-</span><span class="l" id="line-62">            <span class="php-var">$value</span> = \<span class="php-keyword2">array_shift</span>(<span class="php-var">$array</span>);
+</span><span class="l" id="line-61">        <span class="php-keyword1">while</span> (<span class="php-var">$data</span>) {
+</span><span class="l" id="line-62">            <span class="php-var">$value</span> = \<span class="php-keyword2">array_shift</span>(<span class="php-var">$data</span>);
 </span><span class="l" id="line-63">
 </span><span class="l" id="line-64">            <span class="php-keyword1">if</span> (\<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>)) {
-</span><span class="l" id="line-65">                <span class="php-var">$array</span> = \<span class="php-keyword2">array_merge</span>(<span class="php-var">$value</span>, <span class="php-var">$array</span>);
+</span><span class="l" id="line-65">                <span class="php-var">$data</span> = \<span class="php-keyword2">array_merge</span>(<span class="php-var">$value</span>, <span class="php-var">$data</span>);
 </span><span class="l" id="line-66">                <span class="php-keyword1">continue</span>;
 </span><span class="l" id="line-67">            }
 </span><span class="l" id="line-68">
