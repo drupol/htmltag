@@ -1,12 +1,22 @@
 {
     "name": "drupol/htmltag",
-    "description": "A fast and extensible helper library for creating HTML tags, their attributes and content.",
-    "keywords": ["html", "tags", "attributes"],
+    "description": "A fast and extensible helper library for generating HTML, create tags, their attributes and content.",
+    "keywords": ["html", "tags", "attributes", "html generation"],
     "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pol Dellaiera",
+            "email": "pol.dellaiera@protonmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">= 5.6"
     },
     "require-dev": {
+        "apigen/apigen": "dev-master",
         "codacy/coverage": "^1.4",
         "drupol/phpspec-annotation": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.10",
@@ -27,18 +37,8 @@
         "sensiolabs/security-checker": "^4.1",
         "squizlabs/php_codesniffer": "^3",
         "symfony/console": "^3.0",
-        "apigen/apigen": "dev-master",
         "roave/better-reflection": "dev-master"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Pol Dellaiera",
-            "email": "pol.dellaiera@protonmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "drupol\\htmltag\\": "./src/",
