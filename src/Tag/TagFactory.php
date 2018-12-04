@@ -11,11 +11,14 @@ use drupol\htmltag\Attributes\AttributesInterface;
 class TagFactory implements TagFactoryInterface
 {
     /**
-     * The Tag classname.
+     * The classes registry.
      *
-     * @var string
+     * @var array
      */
-    protected $tag_classname = Tag::class;
+    public static $registry = [
+        '!--' => Comment::class,
+        '*' => Tag::class
+    ];
 
     /**
      * The attributes factory classname.
@@ -32,8 +35,7 @@ class TagFactory implements TagFactoryInterface
         array $attributes = [],
         $content = null,
         $attribute_factory_classname = null,
-        $attributes_factory_classname = null,
-        $tag_classname = null
+        $attributes_factory_classname = null
     ) {
         $static = new static;
 
@@ -42,8 +44,7 @@ class TagFactory implements TagFactoryInterface
             $attributes,
             $content,
             $attribute_factory_classname,
-            $attributes_factory_classname,
-            $tag_classname
+            $attributes_factory_classname
         );
     }
 
@@ -55,8 +56,7 @@ class TagFactory implements TagFactoryInterface
         array $attributes = [],
         $content = null,
         $attribute_factory_classname = null,
-        $attributes_factory_classname = null,
-        $comment_classname = null
+        $attributes_factory_classname = null
     ) {
         $attributes_factory_classname = null === $attributes_factory_classname ?
             $this->attributes_factory_classname:
@@ -68,12 +68,22 @@ class TagFactory implements TagFactoryInterface
             $attribute_factory_classname
         );
 
-        $comment_classname = null === $comment_classname ?
-            $this->tag_classname:
-            $comment_classname;
+        $tag_classname = isset(static::$registry[$name]) ?
+            static::$registry[$name] :
+            static::$registry['*'] ;
+
+        if (!in_array(TagInterface::class, class_implements($tag_classname), true)) {
+            throw new \Exception(
+                sprintf(
+                    'The class (%s) must implement the interface %s.',
+                    $tag_classname,
+                    TagInterface::class
+                )
+            );
+        }
 
         /** @var \drupol\htmltag\Tag\TagInterface $tag */
-        $tag = (new \ReflectionClass($comment_classname))
+        $tag = (new \ReflectionClass($tag_classname))
             ->newInstanceArgs([
                 $attributes,
                 $name,

@@ -41,9 +41,14 @@
     },
     "autoload": {
         "psr-4": {
-            "drupol\\htmltag\\": "./src/",
-            "drupol\\htmltag\\benchmarks\\": "./benchmarks/"
+            "drupol\\htmltag\\": "./src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "drupol\\htmltag\\benchmarks\\": "./benchmarks/"
+        },
+        "classmap": ["spec/src/"]
     },
     "config": {
         "sort-packages": true

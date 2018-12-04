@@ -20,8 +20,6 @@ interface TagFactoryInterface
      *   The attribute factory classname.
      * @param string|null $attributes_factoryclassname_classname
      *   The attributes factory classname.
-     * @param string|null $tag_classname
-     *   The tag classname.
      *
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag.
@@ -31,8 +29,7 @@ interface TagFactoryInterface
         array $attributes = [],
         $content = null,
         $attribute_factoryclassname_classname = null,
-        $attributes_factoryclassname_classname = null,
-        $tag_classname = null
+        $attributes_factoryclassname_classname = null
     );
 
     /**
@@ -48,8 +45,6 @@ interface TagFactoryInterface
      *   The attribute factory classname.
      * @param string|null $attributes_factoryclassname_classname
      *   The attributes factory classname.
-     * @param string|null $comment_classname
-     *   The tag classname.
      *
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag.
@@ -59,7 +54,6 @@ interface TagFactoryInterface
         array $attributes = [],
         $content = null,
         $attribute_factoryclassname_classname = null,
-        $attributes_factoryclassname_classname = null,
-        $comment_classname = null
+        $attributes_factoryclassname_classname = null
     );
 }

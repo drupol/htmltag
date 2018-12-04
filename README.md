@@ -248,52 +248,48 @@ echo $attribute; // class="section"
 
 ## Dependency injection and extensions
 
-Thanks to the factories provided in the library, it is possible to inject different objects in place of the default ones.
+Thanks to the factories provided in the library, it is possible to use different classes in place of the default ones.
 
 Ex: You want to have a special handling for the "class" attribute.
 
 ```php
-class CustomAttribute extends \drupol\htmltag\Attribute\Attribute {
-  /**
-   * {@inheritdoc}
-   */
-  protected function preprocess(array $values, $name = NULL) {
-    // Special handling for "class" attribute.
-    if ('class' === $name) {
-      // Remove duplicated values.
-      $values = array_unique($values);
+class MyCustomAttributeClass extends \drupol\htmltag\Attribute\Attribute {
+    /**
+     * {@inheritdoc}
+     */
+    protected function preprocess(array $values, $name = NULL) {
+        // Special handling for "class" attribute.
+        if ('class' === $name) {
+            // Remove duplicated values.
+            $values = array_unique($values);
 
-      // Trim values.
-      $values = array_map('trim', $values);
+            // Trim values.
+            $values = array_map('trim', $values);
 
-      // Sort values.
-      natcasesort($values);
+            // Convert to lower case
+            $values = array_map('strtolower', $values);
+
+            // Sort values.
+            natcasesort($values);
+        }
+
+        return $values;
     }
-
-    return $values;
-  }
 }
 
-class CustomAttributeFactory extends \drupol\htmltag\Attribute\AttributeFactory {
-    protected $attribute_classname = CustomAttribute::class;
-}
+\drupol\htmltag\Attribute\AttributeFactory::$registry['class'] = MyCustomAttributeClass::class;
 
-$tag = \drupol\htmltag\Tag\TagFactory::build(
-    'p',
-    [],
-    false,
-    CustomAttributeFactory::class
-);
+$tag = HtmlTag::tag('p');
 
 // Add a class attribute and some values.
-$tag->attr('class', 'e', 'c', ['a', 'b'], 'd', 'a', ' f ');
+$tag->attr('class', 'E', 'C', ['A', 'B'], 'D', 'A', ' F ');
 // Add a random attribute and the same values.
 $tag->attr('data-original', 'e', 'c', ['a', 'b'], 'd', 'a', ' f ');
 
 echo $tag; // <p class="a b c d e f" data-original="e c a b d a  f "/>
 ```
 
-The same mechanism goes for Attributes and Tag classes.
+The same mechanism goes for the `Tag` class.
 
 ## Security
 

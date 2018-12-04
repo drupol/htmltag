@@ -8,30 +8,42 @@ namespace drupol\htmltag\Attribute;
 class AttributeFactory implements AttributeFactoryInterface
 {
     /**
-     * The attribute classname.
+     * The classes registry.
      *
-     * @var string
+     * @var array
      */
-    protected $attribute_classname = Attribute::class;
+    public static $registry = [
+        '*' => Attribute::class
+    ];
 
     /**
      * {@inheritdoc}
      */
-    public static function build($name, $value = null, $attribute_classname = null)
+    public static function build($name, $value = null)
     {
         $static = new static();
 
-        return $static->getInstance($name, $value, $attribute_classname);
+        return $static->getInstance($name, $value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getInstance($name, $value = null, $attribute_classname = null)
+    public function getInstance($name, $value = null)
     {
-        $attribute_classname = null == $attribute_classname ?
-            $this->attribute_classname :
-            $attribute_classname;
+        $attribute_classname = isset(static::$registry[$name]) ?
+            static::$registry[$name] :
+            static::$registry['*'] ;
+
+        if (!in_array(AttributeInterface::class, class_implements($attribute_classname), true)) {
+            throw new \Exception(
+                sprintf(
+                    'The class (%s) must implement the interface %s.',
+                    $attribute_classname,
+                    AttributeInterface::class
+                )
+            );
+        }
 
         /** @var \drupol\htmltag\Attribute\AttributeInterface $attribute */
         $attribute = (new \ReflectionClass($attribute_classname))
