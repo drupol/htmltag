@@ -33,7 +33,7 @@ final class HtmlBuilder implements StringableInterface
                 return $this;
             }
 
-            $comment = HtmlTag::comment($arguments[0]);
+            $comment = HtmlTag::tag('!--', [], $arguments[0]);
 
             if (null != $this->scope) {
                 $this->scope->content($this->scope->getContentAsArray(), $comment);

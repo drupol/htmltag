@@ -11,7 +11,8 @@ class CommentSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('comment');
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, [], '!--');
     }
 
     public function it_is_initializable()
@@ -21,7 +22,8 @@ class CommentSpec extends ObjectBehavior
 
     public function it_can_create_a_comment()
     {
-        $this->beConstructedWith('Hello world');
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, [], 'Hello world');
         $this
             ->render()
             ->shouldReturn('<!--Hello world-->');

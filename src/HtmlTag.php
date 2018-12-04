@@ -34,13 +34,6 @@ class HtmlTag implements HtmlTagInterface
     protected $tag_factory_classname = TagFactory::class;
 
     /**
-     * The comment factory classname.
-     *
-     * @var string
-     */
-    protected $comment_factory_classname = CommentFactory::class;
-
-    /**
      * {@inheritdoc}
      */
     public static function tag(
@@ -73,27 +66,6 @@ class HtmlTag implements HtmlTagInterface
             $content,
             $attribute_factory_classname,
             $attributes_factory_classname
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function comment(
-        $content = null,
-        $comment_factory_classname = null
-    ) {
-        $static = new static();
-
-        $comment_factory_classname = null == $comment_factory_classname ?
-            $static->comment_factory_classname :
-            $comment_factory_classname;
-
-        /** @var \drupol\htmltag\Tag\CommentFactory $comment_factory_classname */
-        $comment_factory_classname = (new \ReflectionClass($comment_factory_classname))->newInstance();
-
-        return $comment_factory_classname::build(
-            $content
         );
     }
 
