@@ -2,6 +2,9 @@
 
 namespace drupol\htmltag;
 
+/**
+ * Interface RenderableInterface
+ */
 interface RenderableInterface
 {
     /**
