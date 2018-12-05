@@ -21,9 +21,7 @@ class AttributeFactory implements AttributeFactoryInterface
      */
     public static function build($name, $value = null)
     {
-        $static = new static();
-
-        return $static->getInstance($name, $value);
+        return (new static())->getInstance($name, $value);
     }
 
     /**

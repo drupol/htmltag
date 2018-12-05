@@ -16,21 +16,11 @@ interface TagFactoryInterface
      *   The tag attributes.
      * @param mixed $content
      *   The tag content.
-     * @param string|null $attribute_factoryclassname_classname
-     *   The attribute factory classname.
-     * @param string|null $attributes_factoryclassname_classname
-     *   The attributes factory classname.
      *
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag.
      */
-    public static function build(
-        $name,
-        array $attributes = [],
-        $content = null,
-        $attribute_factoryclassname_classname = null,
-        $attributes_factoryclassname_classname = null
-    );
+    public static function build($name, array $attributes = [], $content = null);
 
     /**
      * Create a new tag.
@@ -41,19 +31,9 @@ interface TagFactoryInterface
      *   The tag attributes.
      * @param mixed $content
      *   The tag content.
-     * @param string|null $attribute_factoryclassname_classname
-     *   The attribute factory classname.
-     * @param string|null $attributes_factoryclassname_classname
-     *   The attributes factory classname.
      *
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag.
      */
-    public function getInstance(
-        $name,
-        array $attributes = [],
-        $content = null,
-        $attribute_factoryclassname_classname = null,
-        $attributes_factoryclassname_classname = null
-    );
+    public function getInstance($name, array $attributes = [], $content = null);
 }

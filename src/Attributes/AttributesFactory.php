@@ -25,9 +25,7 @@ class AttributesFactory implements AttributesFactoryInterface
     public static function build(
         array $attributes = []
     ) {
-        $static = new static();
-
-        return $static->getInstance($attributes);
+        return (new static())->getInstance($attributes);
     }
 
     /**

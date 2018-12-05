@@ -16,16 +16,10 @@ class TagFactory implements TagFactoryInterface
      * @var array
      */
     public static $registry = [
+        'attributes_factory' => AttributesFactory::class,
         '!--' => Comment::class,
         '*' => Tag::class,
     ];
-
-    /**
-     * The attributes factory classname.
-     *
-     * @var string
-     */
-    protected $attributes_factory_classname = AttributesFactory::class;
 
     /**
      * {@inheritdoc}
@@ -33,19 +27,9 @@ class TagFactory implements TagFactoryInterface
     public static function build(
         $name,
         array $attributes = [],
-        $content = null,
-        $attribute_factory_classname = null,
-        $attributes_factory_classname = null
+        $content = null
     ) {
-        $static = new static;
-
-        return $static->getInstance(
-            $name,
-            $attributes,
-            $content,
-            $attribute_factory_classname,
-            $attributes_factory_classname
-        );
+        return (new static())->getInstance($name, $attributes, $content);
     }
 
     /**
@@ -54,19 +38,12 @@ class TagFactory implements TagFactoryInterface
     public function getInstance(
         $name,
         array $attributes = [],
-        $content = null,
-        $attribute_factory_classname = null,
-        $attributes_factory_classname = null
+        $content = null
     ) {
-        $attributes_factory_classname = null === $attributes_factory_classname ?
-            $this->attributes_factory_classname:
-            $attributes_factory_classname;
+        $attributes_factory_classname = static::$registry['attributes_factory'];
 
         /** @var AttributesInterface $attributes */
-        $attributes = $attributes_factory_classname::build(
-            $attributes,
-            $attribute_factory_classname
-        );
+        $attributes = $attributes_factory_classname::build($attributes);
 
         $tag_classname = isset(static::$registry[$name]) ?
             static::$registry[$name] :
