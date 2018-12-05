@@ -16,4 +16,11 @@ class TestTagFactorySpec extends ObjectBehavior
     {
         $this->shouldThrow(\Exception::class)->during('build', ['p']);
     }
+
+    public function it_can_detect_if_a_class_is_valid()
+    {
+        $this->beConstructedThrough('build', ['a']);
+        $this->content('content')->shouldReturn('content');
+        $this->render()->shouldReturn('<a>content</a>');
+    }
 }
