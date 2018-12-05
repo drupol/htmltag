@@ -2,11 +2,8 @@
 
 namespace drupol\htmltag\benchmarks;
 
-use drupol\htmltag\Attribute\Attribute;
 use drupol\htmltag\Attribute\AttributeFactory;
 use drupol\htmltag\Attributes\Attributes;
-use drupol\htmltag\Attributes\AttributesFactory;
-use drupol\htmltag\HtmlTag;
 use PhpBench\Benchmark\Metadata\Annotations\BeforeMethods;
 
 /**

@@ -8,6 +8,6 @@ use drupol\htmltag\Tag\TagFactory;
 class TestTagFactory extends TagFactory
 {
     public static $registry = [
-        '*' => InvalidTagClass::class
+        '*' => InvalidTagClass::class,
     ];
 }

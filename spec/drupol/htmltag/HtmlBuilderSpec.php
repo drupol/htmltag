@@ -4,7 +4,6 @@ namespace spec\drupol\htmltag;
 
 use drupol\htmltag\HtmlBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class HtmlBuilderSpec extends ObjectBehavior
 {

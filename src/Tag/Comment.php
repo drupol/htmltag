@@ -2,8 +2,6 @@
 
 namespace drupol\htmltag\Tag;
 
-use drupol\htmltag\Attributes\AttributesFactory;
-
 /**
  * Class Comment.
  */

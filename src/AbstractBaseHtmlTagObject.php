@@ -63,6 +63,7 @@ abstract class AbstractBaseHtmlTagObject
 
             if (\is_array($value)) {
                 $data = \array_merge($value, $data);
+
                 continue;
             }
 
@@ -91,20 +92,24 @@ abstract class AbstractBaseHtmlTagObject
         switch (\gettype($data)) {
             case 'string':
                 $return = $data;
+
                 break;
             case 'integer':
             case 'double':
                 $return = (string) $data;
+
                 break;
             case 'object':
                 if (\method_exists($data, '__toString')) {
                     $return = $data->__toString();
                 }
+
                 break;
             case 'boolean':
             case 'array':
             default:
                 $return = null;
+
                 break;
         }
 

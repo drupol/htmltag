@@ -10,6 +10,6 @@ class TestAttributeFactory extends AttributeFactory
 {
     public static $registry = [
         'class' => ValidAttributeClass::class,
-        '*' => InvalidAttributeClass::class
+        '*' => InvalidAttributeClass::class,
     ];
 }

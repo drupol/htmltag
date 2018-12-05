@@ -90,7 +90,7 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
     public function content(...$data)
     {
         if ([] != $data) {
-            if (\reset($data) === null) {
+            if (null === \reset($data)) {
                 $data = null;
             }
 

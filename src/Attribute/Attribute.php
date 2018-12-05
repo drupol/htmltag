@@ -192,7 +192,8 @@ class Attribute extends AbstractBaseHtmlTagObject implements AttributeInterface
                     return \in_array($substring_item, $values, true);
                 },
                 $this->ensureFlatArray($substring)
-            )
+            ),
+            true
         );
     }
 

@@ -6,7 +6,6 @@ use drupol\htmltag\Attributes\AttributesInterface;
 use drupol\htmltag\Attribute\AttributeInterface;
 use drupol\htmltag\Tag\TagInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class HtmlTagSpec extends ObjectBehavior
 {
@@ -33,7 +32,7 @@ class HtmlTagSpec extends ObjectBehavior
         $this::attributes(
             [
                 'foo' => 'bar',
-                'class' => 'sidebar'
+                'class' => 'sidebar',
             ]
         )
             ->shouldBeAnInstanceOf(AttributesInterface::class);

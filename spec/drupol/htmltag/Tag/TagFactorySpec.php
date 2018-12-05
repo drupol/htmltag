@@ -4,7 +4,6 @@ namespace spec\drupol\htmltag\Tag;
 
 use drupol\htmltag\Tag\TagFactory;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class TagFactorySpec extends ObjectBehavior
 {

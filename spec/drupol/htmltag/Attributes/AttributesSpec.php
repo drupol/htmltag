@@ -7,7 +7,6 @@ use drupol\htmltag\Attribute\AttributeInterface;
 use drupol\htmltag\Attributes\Attributes;
 use drupol\htmltag\StringableInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class AttributesSpec extends ObjectBehavior
 {
@@ -203,20 +202,20 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getStorage()
-            ->shouldReturn(array());
+            ->shouldReturn([]);
 
         $this
             ->append('data-closable')
             ->append('class', 'b')
             ->append('class', 'a c');
 
-        $expected = array(
-            'data-closable' => array(),
-            'class' => array(
+        $expected = [
+            'data-closable' => [],
+            'class' => [
                 'b',
                 'a c',
-            ),
-        );
+            ],
+        ];
 
         $this->getValuesAsArray()->shouldReturn($expected);
     }
@@ -232,7 +231,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getStorage()
-            ->shouldReturn(array());
+            ->shouldReturn([]);
 
         $this
             ->append('data-closable')
@@ -348,7 +347,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $data =                 [
             'class' => ['a', 'b', 'c'],
-            'data-popup' => null
+            'data-popup' => null,
         ];
 
         $attributeFactory = new AttributeFactory();
@@ -369,7 +368,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $data =                 [
             'class' => ['a', 'b', 'c'],
-            'data-popup' => null
+            'data-popup' => null,
         ];
 
         $attributeFactory = new AttributeFactory();
@@ -403,14 +402,14 @@ class AttributesSpec extends ObjectBehavior
                 $data
             );
 
-        $import = array(
+        $import = [
             'class' => ['plop', 'foo'],
             'data-popup' => null,
-            'data-test' => array(
+            'data-test' => [
                 'b',
-                'a c'
-            ),
-        );
+                'a c',
+            ],
+        ];
 
         $this
             ->import($import)

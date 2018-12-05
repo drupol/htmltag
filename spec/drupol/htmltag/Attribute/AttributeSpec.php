@@ -5,7 +5,6 @@ namespace spec\drupol\htmltag\Attribute;
 use drupol\htmltag\Attribute\Attribute;
 use drupol\htmltag\StringableInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class AttributeSpec extends ObjectBehavior
 {
@@ -168,7 +167,7 @@ class AttributeSpec extends ObjectBehavior
         $this
             ->alter(
                 function ($values) {
-                    return array_map('strtoupper', $values);
+                    return \array_map('strtoupper', $values);
                 }
             )
             ->render()
@@ -286,7 +285,7 @@ class AttributeSpec extends ObjectBehavior
             ->shouldReturn([
                 'hello',
                 $unsafe_object->__toString(),
-                $unsafe_object->__toString()
+                $unsafe_object->__toString(),
             ]);
     }
 }
