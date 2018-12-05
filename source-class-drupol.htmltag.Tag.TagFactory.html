@@ -85,7 +85,7 @@
 </span></span><span class="l" id="line-17"><span class="php-comment">     */</span>
 </span><span class="l" id="line-18">    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-var">$registry</span> = [
 </span><span class="l" id="line-19">        <span class="php-quote">'!--'</span> =&gt; Comment::<span class="php-keyword1">class</span>,
-</span><span class="l" id="line-20">        <span class="php-quote">'*'</span> =&gt; Tag::<span class="php-keyword1">class</span>
+</span><span class="l" id="line-20">        <span class="php-quote">'*'</span> =&gt; Tag::<span class="php-keyword1">class</span>,
 </span><span class="l" id="line-21">    ];
 </span><span class="l" id="line-22">
 </span><span class="l" id="line-23">    <span class="php-comment">/**
@@ -140,9 +140,9 @@
 </span><span class="l" id="line-72">            <span class="php-keyword1">static</span>::<span class="php-var">$registry</span>[<span class="php-var">$name</span>] :
 </span><span class="l" id="line-73">            <span class="php-keyword1">static</span>::<span class="php-var">$registry</span>[<span class="php-quote">'*'</span>] ;
 </span><span class="l" id="line-74">
-</span><span class="l" id="line-75">        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(TagInterface::<span class="php-keyword1">class</span>, <span class="php-keyword2">class_implements</span>(<span class="php-var">$tag_classname</span>), <span class="php-keyword1">true</span>)) {
+</span><span class="l" id="line-75">        <span class="php-keyword1">if</span> (!\<span class="php-keyword2">in_array</span>(TagInterface::<span class="php-keyword1">class</span>, \<span class="php-keyword2">class_implements</span>(<span class="php-var">$tag_classname</span>), <span class="php-keyword1">true</span>)) {
 </span><span class="l" id="line-76">            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(
-</span><span class="l" id="line-77">                <span class="php-keyword2">sprintf</span>(
+</span><span class="l" id="line-77">                \<span class="php-keyword2">sprintf</span>(
 </span><span class="l" id="line-78">                    <span class="php-quote">'The class (%s) must implement the interface %s.'</span>,
 </span><span class="l" id="line-79">                    <span class="php-var">$tag_classname</span>,
 </span><span class="l" id="line-80">                    TagInterface::<span class="php-keyword1">class</span>

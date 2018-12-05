@@ -140,7 +140,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_build">#</a>
-            <code><a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#29-41">build</a>( <span> array <span class="property-name">$attributes</span> = <span class="php-keyword1">array</span> ( )</span>, <span> <span class="property-name">$attribute_factory_classname</span> = <span class="php-keyword1">NULL</span></span>, <span> <span class="property-name">$attributes_classname</span> = <span class="php-keyword1">NULL</span></span> )</code>
+            <code><a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#25-31">build</a>( <span> array <span class="property-name">$attributes</span> = <span class="php-keyword1">array</span> ( )</span> )</code>
 
             <div class="description">
                 {@inheritdoc}
@@ -180,7 +180,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_getInstance">#</a>
-            <code><a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#46-70">getInstance</a>( <span> array <span class="property-name">$attributes</span> = <span class="php-keyword1">array</span> ( )</span>, <span> <span class="property-name">$attribute_factory_classname</span> = <span class="php-keyword1">NULL</span></span>, <span> <span class="property-name">$attributes_classname</span> = <span class="php-keyword1">NULL</span></span> )</code>
+            <code><a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#36-54">getInstance</a>( <span> array <span class="property-name">$attributes</span> = <span class="php-keyword1">array</span> ( )</span> )</code>
 
             <div class="description">
                 {@inheritdoc}
@@ -212,53 +212,31 @@
 
         <table class="summary table table-bordered table-responsive table-striped" id="properties">
             <tr><th colspan="3">Properties Summary</th></tr>
-<tr id="$attribute_factory_classname">
+<tr id="$registry">
     <td class="attributes">
         <code class="keyword">
-            protected 
+            public static
 
-            string
+            array
         </code>
     </td>
 
     <td class="name">
         <code>
-            <a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#17" class="property-name">$attribute_factory_classname</a>
+            <a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#17-20" class="property-name">$registry</a>
         </code>
         <div class="description">
-            The attribute factory classname.
+            The classes registry.
 
         </div>
     </td>
     <td class="value">
         <div>
-            <a href="#$attribute_factory_classname" class="anchor pull-right">#</a>
-            <code><span class="php-quote">'drupol\\htmltag\\Attribute\\AttributeFactory'</span></code>
-        </div>
-    </td>
-</tr>
-<tr id="$attributes_classname">
-    <td class="attributes">
-        <code class="keyword">
-            protected 
-
-            string
-        </code>
-    </td>
-
-    <td class="name">
-        <code>
-            <a href="source-class-drupol.htmltag.Attributes.AttributesFactory.html#24" class="property-name">$attributes_classname</a>
-        </code>
-        <div class="description">
-            The attributes classname.
-
-        </div>
-    </td>
-    <td class="value">
-        <div>
-            <a href="#$attributes_classname" class="anchor pull-right">#</a>
-            <code><span class="php-quote">'drupol\\htmltag\\Attributes\\Attributes'</span></code>
+            <a href="#$registry" class="anchor pull-right">#</a>
+            <code><span class="php-keyword1">array</span> (
+  <span class="php-quote">'attribute_factory'</span> =&gt; <span class="php-quote">'drupol\\htmltag\\Attribute\\AttributeFactory'</span>,
+  <span class="php-quote">'*'</span> =&gt; <span class="php-quote">'drupol\\htmltag\\Attributes\\Attributes'</span>,
+)</code>
         </div>
     </td>
 </tr>

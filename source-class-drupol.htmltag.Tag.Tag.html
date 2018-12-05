@@ -158,7 +158,7 @@
 </span><span class="l" id="line-90">    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> content(...<span class="php-var">$data</span>)
 </span><span class="l" id="line-91">    {
 </span><span class="l" id="line-92">        <span class="php-keyword1">if</span> ([] != <span class="php-var">$data</span>) {
-</span><span class="l" id="line-93">            <span class="php-keyword1">if</span> (\<span class="php-keyword2">reset</span>(<span class="php-var">$data</span>) === <span class="php-keyword1">null</span>) {
+</span><span class="l" id="line-93">            <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === \<span class="php-keyword2">reset</span>(<span class="php-var">$data</span>)) {
 </span><span class="l" id="line-94">                <span class="php-var">$data</span> = <span class="php-keyword1">null</span>;
 </span><span class="l" id="line-95">            }
 </span><span class="l" id="line-96">
