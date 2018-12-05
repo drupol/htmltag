@@ -17,7 +17,6 @@ interface AttributesInterface extends
     RenderableInterface,
     StringableInterface
 {
-
     /**
      * Import attributes.
      *

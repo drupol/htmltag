@@ -5,7 +5,6 @@ namespace spec\drupol\htmltag\Tag;
 use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\Tag\Comment;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class CommentSpec extends ObjectBehavior
 {

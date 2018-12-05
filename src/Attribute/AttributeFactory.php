@@ -13,7 +13,7 @@ class AttributeFactory implements AttributeFactoryInterface
      * @var array
      */
     public static $registry = [
-        '*' => Attribute::class
+        '*' => Attribute::class,
     ];
 
     /**
@@ -35,9 +35,9 @@ class AttributeFactory implements AttributeFactoryInterface
             static::$registry[$name] :
             static::$registry['*'] ;
 
-        if (!in_array(AttributeInterface::class, class_implements($attribute_classname), true)) {
+        if (!\in_array(AttributeInterface::class, \class_implements($attribute_classname), true)) {
             throw new \Exception(
-                sprintf(
+                \sprintf(
                     'The class (%s) must implement the interface %s.',
                     $attribute_classname,
                     AttributeInterface::class
@@ -49,7 +49,7 @@ class AttributeFactory implements AttributeFactoryInterface
         $attribute = (new \ReflectionClass($attribute_classname))
             ->newInstanceArgs([
                 $name,
-                $value
+                $value,
             ]);
 
         return $attribute;

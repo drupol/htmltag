@@ -17,7 +17,7 @@ class TagFactory implements TagFactoryInterface
      */
     public static $registry = [
         '!--' => Comment::class,
-        '*' => Tag::class
+        '*' => Tag::class,
     ];
 
     /**
@@ -72,9 +72,9 @@ class TagFactory implements TagFactoryInterface
             static::$registry[$name] :
             static::$registry['*'] ;
 
-        if (!in_array(TagInterface::class, class_implements($tag_classname), true)) {
+        if (!\in_array(TagInterface::class, \class_implements($tag_classname), true)) {
             throw new \Exception(
-                sprintf(
+                \sprintf(
                     'The class (%s) must implement the interface %s.',
                     $tag_classname,
                     TagInterface::class

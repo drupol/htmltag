@@ -10,60 +10,44 @@ use drupol\htmltag\Attribute\AttributeFactory;
 class AttributesFactory implements AttributesFactoryInterface
 {
     /**
-     * The attribute factory classname.
+     * The classes registry.
      *
-     * @var string
+     * @var array
      */
-    protected $attribute_factory_classname = AttributeFactory::class;
-
-    /**
-     * The attributes classname.
-     *
-     * @var string
-     */
-    protected $attributes_classname = Attributes::class;
+    public static $registry = [
+        'attribute_factory' => AttributeFactory::class,
+        '*' => Attributes::class,
+    ];
 
     /**
      * {@inheritdoc}
      */
     public static function build(
-        array $attributes = [],
-        $attribute_factory_classname = null,
-        $attributes_classname = null
+        array $attributes = []
     ) {
         $static = new static();
 
-        return $static->getInstance(
-            $attributes,
-            $attribute_factory_classname,
-            $attributes_classname
-        );
+        return $static->getInstance($attributes);
     }
 
     /**
      * {@inheritdoc}
      */
     public function getInstance(
-        array $attributes = [],
-        $attribute_factory_classname = null,
-        $attributes_classname = null
+        array $attributes = []
     ) {
-        $attribute_factory_classname = null == $attribute_factory_classname ?
-            $this->attribute_factory_classname :
-            $attribute_factory_classname;
+        $attribute_factory_classname = static::$registry['attribute_factory'];
 
         /** @var \drupol\htmltag\Attribute\AttributeFactoryInterface $attribute_factory_classname */
         $attribute_factory_classname = (new \ReflectionClass($attribute_factory_classname))->newInstance();
 
-        $attributes_classname = null == $attributes_classname ?
-            $this->attributes_classname :
-            $attributes_classname;
+        $attributes_classname = static::$registry['*'];
 
         /** @var \drupol\htmltag\Attributes\AttributesInterface $attributes */
         $attributes = (new \ReflectionClass($attributes_classname))
             ->newInstanceArgs([
                 $attribute_factory_classname,
-                $attributes
+                $attributes,
             ]);
 
         return $attributes;

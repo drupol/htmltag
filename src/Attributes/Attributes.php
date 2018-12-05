@@ -4,7 +4,6 @@ namespace drupol\htmltag\Attributes;
 
 use drupol\htmltag\AbstractBaseHtmlTagObject;
 use drupol\htmltag\Attribute\AttributeFactoryInterface;
-use drupol\htmltag\Attribute\AttributeInterface;
 
 /**
  * Class Attributes.
@@ -67,7 +66,7 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     public function offsetGet($key)
     {
         $this->storage += [
-            $key => $this->attributeFactory->getInstance($key)
+            $key => $this->attributeFactory->getInstance($key),
         ];
 
         return $this->storage[$key];
@@ -102,9 +101,9 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
      */
     public function append($key, ...$values)
     {
-        $this->storage += array(
+        $this->storage += [
             $key => $this->attributeFactory->getInstance($key),
-        );
+        ];
 
         $this->storage[$key]->append($values);
 

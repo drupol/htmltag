@@ -2,7 +2,6 @@
 
 namespace drupol\htmltag;
 
-use drupol\htmltag\Element\Comment;
 use drupol\htmltag\Tag\TagFactory;
 
 /**
@@ -11,20 +10,21 @@ use drupol\htmltag\Tag\TagFactory;
 final class HtmlBuilder implements StringableInterface
 {
     /**
+     * The tag scope.
+     *
      * @var \drupol\htmltag\Tag\TagInterface|null
      */
     private $scope;
 
     /**
+     * The storage.
+     *
      * @var \drupol\htmltag\Tag\TagInterface[]|string[]
      */
     private $storage;
 
     /**
-     * @param string $name
-     * @param array $arguments
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function __call($name, array $arguments = [])
     {

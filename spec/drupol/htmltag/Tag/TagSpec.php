@@ -6,7 +6,6 @@ use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\StringableInterface;
 use drupol\htmltag\Tag\Tag;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class TagSpec extends ObjectBehavior
 {
@@ -103,7 +102,7 @@ class TagSpec extends ObjectBehavior
 
         $this
             ->alter(function (array $values) {
-                return array_map('strtoupper', $values);
+                return \array_map('strtoupper', $values);
             })
             ->render()
             ->shouldReturn('<p/>');
@@ -112,7 +111,7 @@ class TagSpec extends ObjectBehavior
 
         $this
             ->alter(function (array $values) {
-                return array_map('strtoupper', $values);
+                return \array_map('strtoupper', $values);
             })
             ->render()
             ->shouldReturn('<p>HELLO CONTENTGOODBYE CONTENT</p>');
@@ -127,7 +126,7 @@ class TagSpec extends ObjectBehavior
                     'bar',
                     [
                         new randomPrintableObject('<a href="#htmltag">htmltag</a>'),
-                    ]
+                    ],
                 ];
 
                 return $values;
