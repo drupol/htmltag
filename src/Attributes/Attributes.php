@@ -221,7 +221,7 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
      */
     public function getStorage()
     {
-        return \array_values($this->preprocess($this->storage));
+        return new \ArrayIterator(\array_values($this->preprocess($this->storage)));
     }
 
     /**
@@ -229,7 +229,7 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->getStorage());
+        return $this->getStorage();
     }
 
     /**
@@ -237,7 +237,7 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
      */
     public function count()
     {
-        return \count($this->getStorage());
+        return $this->getStorage()->count();
     }
 
     /**

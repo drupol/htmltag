@@ -2,7 +2,6 @@
 
 namespace drupol\htmltag\Attributes;
 
-use drupol\htmltag\Attribute\AttributeInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
 
@@ -144,7 +143,7 @@ interface AttributesInterface extends
     /**
      * Get storage.
      *
-     * @return AttributeInterface[]
+     * @return \ArrayIterator
      *   The storage array.
      */
     public function getStorage();

@@ -202,7 +202,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getStorage()
-            ->shouldReturn([]);
+            ->shouldYield(new \ArrayIterator([]));
 
         $this
             ->append('data-closable')
@@ -231,7 +231,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getStorage()
-            ->shouldReturn([]);
+            ->shouldYield(new \ArrayIterator([]));
 
         $this
             ->append('data-closable')
@@ -240,7 +240,7 @@ class AttributesSpec extends ObjectBehavior
 
         $this
             ->getStorage()
-            ->shouldBeArray();
+            ->shouldBeAnInstanceOf(\ArrayIterator::class);
     }
 
     public function it_can_render()
