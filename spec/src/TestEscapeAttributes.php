@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\tests;
 
 use drupol\htmltag\Attributes\Attributes;
@@ -7,7 +9,7 @@ use drupol\htmltag\Attributes\Attributes;
 class TestEscapeAttributes extends Attributes
 {
     /**
-     * @return string|void|null
+     * @return null|string|void
      */
     public function publicEscape()
     {

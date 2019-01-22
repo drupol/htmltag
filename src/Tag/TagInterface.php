@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\AlterableInterface;
@@ -15,13 +17,12 @@ interface TagInterface extends \Serializable, RenderableInterface, StringableInt
      * Get the attributes as string or a specific attribute if $name is provided.
      *
      * @param string $name
-     *   The name of the attribute.
-     *
+     *   The name of the attribute
      * @param mixed ...$value
      *   The value.
      *
-     * @return string|\drupol\htmltag\Attribute\AttributeInterface
-     *   The attributes as string or a specific Attribute object.
+     * @return \drupol\htmltag\Attribute\AttributeInterface|string
+     *   The attributes as string or a specific Attribute object
      */
     public function attr($name = null, ...$value);
 
@@ -31,8 +32,8 @@ interface TagInterface extends \Serializable, RenderableInterface, StringableInt
      * @param mixed ...$data
      *   The content.
      *
-     * @return string|null
-     *   The content.
+     * @return null|string
+     *   The content
      */
     public function content(...$data);
 
@@ -40,7 +41,7 @@ interface TagInterface extends \Serializable, RenderableInterface, StringableInt
      * Get the content.
      *
      * @return array
-     *   The content as an array.
+     *   The content as an array
      */
     public function getContentAsArray();
 }

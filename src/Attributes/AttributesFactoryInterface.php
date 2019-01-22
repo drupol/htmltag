@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attributes;
 
 /**
- * Interface AttributesFactoryInterface
+ * Interface AttributesFactoryInterface.
  */
 interface AttributesFactoryInterface
 {
@@ -11,10 +13,10 @@ interface AttributesFactoryInterface
      * Create a new attributes.
      *
      * @param array $attributes
-     *   The attributes.
+     *   The attributes
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
     public static function build(
         array $attributes = []
@@ -24,10 +26,10 @@ interface AttributesFactoryInterface
      * Create a new attributes.
      *
      * @param array $attributes
-     *   The attributes.
+     *   The attributes
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
     public function getInstance(
         array $attributes = []

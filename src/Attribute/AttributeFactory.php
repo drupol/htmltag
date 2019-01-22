@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attribute;
 
 /**
- * Class AttributeFactory
+ * Class AttributeFactory.
  */
 class AttributeFactory implements AttributeFactoryInterface
 {
@@ -31,7 +33,7 @@ class AttributeFactory implements AttributeFactoryInterface
     {
         $attribute_classname = isset(static::$registry[$name]) ?
             static::$registry[$name] :
-            static::$registry['*'] ;
+            static::$registry['*'];
 
         if (!\in_array(AttributeInterface::class, \class_implements($attribute_classname), true)) {
             throw new \Exception(

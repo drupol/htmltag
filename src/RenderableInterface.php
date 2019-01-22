@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag;
 
 /**
- * Interface RenderableInterface
+ * Interface RenderableInterface.
  */
 interface RenderableInterface
 {
@@ -11,7 +13,7 @@ interface RenderableInterface
      * Render the object.
      *
      * @return string
-     *   The object rendered in a string.
+     *   The object rendered in a string
      */
     public function render();
 }

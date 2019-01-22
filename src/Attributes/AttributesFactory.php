@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attributes;
 
 use drupol\htmltag\Attribute\AttributeFactory;
 
 /**
- * Class AttributesFactory
+ * Class AttributesFactory.
  */
 class AttributesFactory implements AttributesFactoryInterface
 {

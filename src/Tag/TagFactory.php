@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\Attributes\AttributesInterface;
 
 /**
- * Class TagFactory
+ * Class TagFactory.
  */
 class TagFactory implements TagFactoryInterface
 {
@@ -47,7 +49,7 @@ class TagFactory implements TagFactoryInterface
 
         $tag_classname = isset(static::$registry[$name]) ?
             static::$registry[$name] :
-            static::$registry['*'] ;
+            static::$registry['*'];
 
         if (!\in_array(TagInterface::class, \class_implements($tag_classname), true)) {
             throw new \Exception(

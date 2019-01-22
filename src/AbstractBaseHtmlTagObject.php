@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag;
 
 /**
@@ -12,33 +14,6 @@ namespace drupol\htmltag;
 abstract class AbstractBaseHtmlTagObject
 {
     /**
-     * Make sure that the value parameters is converted into an
-     * array of strings.
-     *
-     * Only simple arrays (no nested arrays) are allowed here.
-     * Values that cannot be converted to strings will be removed from the
-     * resulting array.
-     *
-     * @param mixed[] $values
-     *   The input values.
-     *
-     * @return string[]|null[]
-     *   The output values, should be an array of strings.
-     */
-    protected function ensureStrings(array $values)
-    {
-        return \array_values(
-            \array_filter(
-                \array_map(
-                    [$this, 'ensureString'],
-                    $values
-                ),
-                '\is_string'
-            )
-        );
-    }
-
-    /**
      * Transform a multidimensional array into a flat array.
      *
      * This method will flatten an array containing arrays.
@@ -49,10 +24,10 @@ abstract class AbstractBaseHtmlTagObject
      * @see http://php.net/manual/en/class.recursivearrayiterator.php#106519
      *
      * @param mixed[] $data
-     *   The input array.
+     *   The input array
      *
      * @return mixed[]
-     *   A simple array.
+     *   A simple array
      */
     protected function ensureFlatArray(array $data)
     {
@@ -80,10 +55,10 @@ abstract class AbstractBaseHtmlTagObject
      * When it's not possible, the "null" value is returned instead.
      *
      * @param mixed $data
-     *   The input value.
+     *   The input value
      *
-     * @return string|null
-     *   The value converted as a string or null.
+     * @return null|string
+     *   The value converted as a string or null
      */
     protected function ensureString($data)
     {
@@ -117,32 +92,59 @@ abstract class AbstractBaseHtmlTagObject
     }
 
     /**
+     * Make sure that the value parameters is converted into an
+     * array of strings.
+     *
+     * Only simple arrays (no nested arrays) are allowed here.
+     * Values that cannot be converted to strings will be removed from the
+     * resulting array.
+     *
+     * @param mixed[] $values
+     *   The input values
+     *
+     * @return null[]|string[]
+     *   The output values, should be an array of strings
+     */
+    protected function ensureStrings(array $values)
+    {
+        return \array_values(
+            \array_filter(
+                \array_map(
+                    [$this, 'ensureString'],
+                    $values
+                ),
+                '\is_string'
+            )
+        );
+    }
+
+    /**
+     * Escape a value.
+     *
+     * @param \drupol\htmltag\StringableInterface|string $value
+     *   The value to escape
+     *
+     * @return null|string
+     *   The value escaped
+     */
+    abstract protected function escape($value);
+
+    /**
      * Preprocess values before being used.
      *
      * This is useful when extending the parent class and implementing this
      * method.
      *
      * @param mixed[] $values
-     *   The raw values.
-     * @param string|null $name
-     *   The name of the object is any.
+     *   The raw values
+     * @param null|string $name
+     *   The name of the object is any
      *
      * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
-     *   The values.
+     *   The values
      */
     protected function preprocess(array $values, $name = null)
     {
         return $values;
     }
-
-    /**
-     * Escape a value.
-     *
-     * @param string|\drupol\htmltag\StringableInterface $value
-     *   The value to escape.
-     *
-     * @return string|null
-     *   The value escaped.
-     */
-    abstract protected function escape($value);
 }

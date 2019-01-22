@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\benchmarks;
 
 use drupol\htmltag\Attribute\AttributeFactory;
@@ -18,14 +20,6 @@ class AttributesBench extends AbstractBench
     private $attributeFactory;
 
     /**
-     * Init the attribute factory object.
-     */
-    public function initAttributesRender()
-    {
-        $this->attributeFactory = new AttributeFactory();
-    }
-
-    /**
      * @Revs({1, 100, 1000})
      * @Iterations(5)
      * @Warmup(10)
@@ -34,5 +28,13 @@ class AttributesBench extends AbstractBench
     {
         $attributes = new Attributes($this->attributeFactory, $this->getAttributes());
         $attributes->render();
+    }
+
+    /**
+     * Init the attribute factory object.
+     */
+    public function initAttributesRender()
+    {
+        $this->attributeFactory = new AttributeFactory();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\benchmarks;
 
 use drupol\htmltag\Attribute\Attribute;

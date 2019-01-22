@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag;
 
 use drupol\htmltag\Attribute\AttributeFactory;
@@ -7,16 +9,16 @@ use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\Tag\TagFactory;
 
 /**
- * Class HtmlTag
+ * Class HtmlTag.
  */
 class HtmlTag implements HtmlTagInterface
 {
     /**
      * {@inheritdoc}
      */
-    public static function tag($name, array $attributes = [], $content = null)
+    public static function attribute($name, $value)
     {
-        return TagFactory::build($name, $attributes, $content);
+        return AttributeFactory::build($name, $value);
     }
 
     /**
@@ -30,8 +32,8 @@ class HtmlTag implements HtmlTagInterface
     /**
      * {@inheritdoc}
      */
-    public static function attribute($name, $value)
+    public static function tag($name, array $attributes = [], $content = null)
     {
-        return AttributeFactory::build($name, $value);
+        return TagFactory::build($name, $attributes, $content);
     }
 }

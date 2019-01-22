@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace spec\drupol\htmltag\Tag;
 
 use drupol\htmltag\Attributes\AttributesFactory;
@@ -9,90 +11,6 @@ use PhpSpec\ObjectBehavior;
 
 class TagSpec extends ObjectBehavior
 {
-    public function let()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'tag');
-    }
-
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType(Tag::class);
-    }
-
-    public function it_should_create_a_tag()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-        $this
-        ->attr('class')
-        ->append('paragraph');
-        $this->render()
-        ->shouldBe('<p class="paragraph"/>');
-
-        $subtag = new Tag(AttributesFactory::build(), 'b');
-        $subtag->content(['bold text']);
-
-        $this->content(['hello ', $subtag, $subtag->render()]);
-        $this
-        ->render()
-        ->shouldBe('<p class="paragraph">hello <b>bold text</b>&lt;b&gt;bold text&lt;/b&gt;</p>');
-    }
-
-    public function it_should_return_the_attributes_as_string()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-        $this
-            ->attr('class')
-            ->append('paragraph');
-        $this->attr()->shouldBe(' class="paragraph"');
-
-        $this->render()
-            ->shouldBe('<p class="paragraph"/>');
-    }
-
-    public function it_should_be_able_to_create_and_delete_the_content()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-        $this->content(['hello', ' world']);
-        $this->content()->shouldBe('hello world');
-        $this->render()->shouldBe('<p>hello world</p>');
-
-        $this->content(null);
-        $this->render()->shouldBe('<p/>');
-        $this->content([''])->shouldBe('');
-        $this->render()->shouldBe('<p></p>');
-    }
-
-    public function it_can_be_constructed_statically()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-
-        $p = $this->__callStatic('p', [$attributes]);
-
-        $this->render()->shouldReturn($p->render());
-    }
-
-    public function it_can_be_serialized()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-        $this->attr('class', 'hello class');
-        $this->content('hello content');
-
-        $this->serialize()->shouldReturn('a:3:{s:3:"tag";s:1:"p";s:10:"attributes";a:1:{s:5:"class";a:1:{i:0;s:11:"hello class";}}s:7:"content";s:13:"hello content";}');
-    }
-
-    public function it_can_be_unserialized()
-    {
-        $this->unserialize('a:3:{s:3:"tag";s:1:"p";s:10:"attributes";a:1:{s:5:"class";a:1:{i:0;s:11:"hello class";}}s:7:"content";s:13:"hello content";}');
-
-        $this->render()->shouldReturn('<p class="hello class">hello content</p>');
-    }
-
     public function it_can_alter_the_content()
     {
         $attributes = AttributesFactory::build();
@@ -135,6 +53,33 @@ class TagSpec extends ObjectBehavior
             ->shouldReturn('<p>HELLO CONTENTGOODBYE CONTENT&lt;a href=&quot;#htmltag&quot;&gt;htmltag&lt;/a&gt;boofoobar<a href="#htmltag">htmltag</a></p>');
     }
 
+    public function it_can_be_constructed_statically()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'p');
+
+        $p = $this->__callStatic('p', [$attributes]);
+
+        $this->render()->shouldReturn($p->render());
+    }
+
+    public function it_can_be_serialized()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'p');
+        $this->attr('class', 'hello class');
+        $this->content('hello content');
+
+        $this->serialize()->shouldReturn('a:3:{s:3:"tag";s:1:"p";s:10:"attributes";a:1:{s:5:"class";a:1:{i:0;s:11:"hello class";}}s:7:"content";s:13:"hello content";}');
+    }
+
+    public function it_can_be_unserialized()
+    {
+        $this->unserialize('a:3:{s:3:"tag";s:1:"p";s:10:"attributes";a:1:{s:5:"class";a:1:{i:0;s:11:"hello class";}}s:7:"content";s:13:"hello content";}');
+
+        $this->render()->shouldReturn('<p class="hello class">hello content</p>');
+    }
+
     public function it_can_escape_content()
     {
         $attributes = AttributesFactory::build();
@@ -145,6 +90,63 @@ class TagSpec extends ObjectBehavior
         $this->content('hello content', 'goodbye content', $unsafe_object, true, null, false, $unsafe_object->__toString());
 
         $this->render()->shouldReturn('<p>hello contentgoodbye content"<a href="#unsafe">Unsafe value</a>&quot;&lt;a href=&quot;#unsafe&quot;&gt;Unsafe value&lt;/a&gt;</p>');
+    }
+
+    public function it_is_initializable()
+    {
+        $this->shouldHaveType(Tag::class);
+    }
+
+    public function it_should_be_able_to_create_and_delete_the_content()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'p');
+        $this->content(['hello', ' world']);
+        $this->content()->shouldBe('hello world');
+        $this->render()->shouldBe('<p>hello world</p>');
+
+        $this->content(null);
+        $this->render()->shouldBe('<p/>');
+        $this->content([''])->shouldBe('');
+        $this->render()->shouldBe('<p></p>');
+    }
+
+    public function it_should_create_a_tag()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'p');
+        $this
+            ->attr('class')
+            ->append('paragraph');
+        $this->render()
+            ->shouldBe('<p class="paragraph"/>');
+
+        $subtag = new Tag(AttributesFactory::build(), 'b');
+        $subtag->content(['bold text']);
+
+        $this->content(['hello ', $subtag, $subtag->render()]);
+        $this
+            ->render()
+            ->shouldBe('<p class="paragraph">hello <b>bold text</b>&lt;b&gt;bold text&lt;/b&gt;</p>');
+    }
+
+    public function it_should_return_the_attributes_as_string()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'p');
+        $this
+            ->attr('class')
+            ->append('paragraph');
+        $this->attr()->shouldBe(' class="paragraph"');
+
+        $this->render()
+            ->shouldBe('<p class="paragraph"/>');
+    }
+
+    public function let()
+    {
+        $attributes = AttributesFactory::build();
+        $this->beConstructedWith($attributes, 'tag');
     }
 }
 

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag;
 
 /**
- * Interface AlterableInterface
+ * Interface AlterableInterface.
  */
 interface AlterableInterface
 {
@@ -14,7 +16,7 @@ interface AlterableInterface
      *   The closure(s).
      *
      * @return object
-     *   The object.
+     *   The object
      */
     public function alter(callable ...$closures);
 }

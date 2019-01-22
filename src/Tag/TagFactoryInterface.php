@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Tag;
 
 /**
- * Interface TagFactoryInterface
+ * Interface TagFactoryInterface.
  */
 interface TagFactoryInterface
 {
@@ -11,14 +13,14 @@ interface TagFactoryInterface
      * Create a new tag.
      *
      * @param string $name
-     *   The tag name.
+     *   The tag name
      * @param array $attributes
-     *   The tag attributes.
+     *   The tag attributes
      * @param mixed $content
-     *   The tag content.
+     *   The tag content
      *
      * @return \drupol\htmltag\Tag\TagInterface
-     *   The tag.
+     *   The tag
      */
     public static function build($name, array $attributes = [], $content = null);
 
@@ -26,14 +28,14 @@ interface TagFactoryInterface
      * Create a new tag.
      *
      * @param string $name
-     *   The tag name.
+     *   The tag name
      * @param array $attributes
-     *   The tag attributes.
+     *   The tag attributes
      * @param mixed $content
-     *   The tag content.
+     *   The tag content
      *
      * @return \drupol\htmltag\Tag\TagInterface
-     *   The tag.
+     *   The tag
      */
     public function getInstance($name, array $attributes = [], $content = null);
 }

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attribute;
 
 /**
- * Interface AttributeFactoryInterface
+ * Interface AttributeFactoryInterface.
  */
 interface AttributeFactoryInterface
 {
@@ -11,12 +13,12 @@ interface AttributeFactoryInterface
      * Create a new attribute.
      *
      * @param string $name
-     *   The attribute name.
-     * @param string|mixed[]|null $value
-     *   The attribute value.
+     *   The attribute name
+     * @param null|mixed[]|string $value
+     *   The attribute value
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
+     *   The attribute
      */
     public static function build($name, $value = null);
 
@@ -24,12 +26,12 @@ interface AttributeFactoryInterface
      * Create a new attribute.
      *
      * @param string $name
-     *   The attribute name.
-     * @param string|mixed[]|null $value
-     *   The attribute value.
+     *   The attribute name
+     * @param null|mixed[]|string $value
+     *   The attribute value
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
+     *   The attribute
      */
     public function getInstance($name, $value = null);
 }

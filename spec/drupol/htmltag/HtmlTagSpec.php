@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace spec\drupol\htmltag;
 
-use drupol\htmltag\Attributes\AttributesInterface;
 use drupol\htmltag\Attribute\AttributeInterface;
+use drupol\htmltag\Attributes\AttributesInterface;
 use drupol\htmltag\Tag\TagInterface;
 use PhpSpec\ObjectBehavior;
 
@@ -27,6 +29,16 @@ class HtmlTagSpec extends ObjectBehavior
             ->shouldReturn('<region class="sidebar">hello region</region>');
     }
 
+    public function it_can_build_attribute()
+    {
+        $this::attribute('foo', 'bar')
+            ->shouldBeAnInstanceOf(AttributeInterface::class);
+
+        $this::attribute('foo', 'bar')
+            ->render()
+            ->shouldReturn('foo="bar"');
+    }
+
     public function it_can_build_attributes()
     {
         $this::attributes(
@@ -45,15 +57,5 @@ class HtmlTagSpec extends ObjectBehavior
         )
             ->render()
             ->shouldReturn(' foo="bar" class="sidebar"');
-    }
-
-    public function it_can_build_attribute()
-    {
-        $this::attribute('foo', 'bar')
-            ->shouldBeAnInstanceOf(AttributeInterface::class);
-
-        $this::attribute('foo', 'bar')
-            ->render()
-            ->shouldReturn('foo="bar"');
     }
 }

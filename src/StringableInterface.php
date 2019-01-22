@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag;
 
 /**
- * Interface StringableInterface
+ * Interface StringableInterface.
  */
 interface StringableInterface
 {
@@ -11,7 +13,7 @@ interface StringableInterface
      * Get a string representation of the object.
      *
      * @return string
-     *   The string.
+     *   The string
      */
     public function __toString();
 }

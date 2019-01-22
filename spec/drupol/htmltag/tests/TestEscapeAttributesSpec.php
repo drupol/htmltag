@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace spec\drupol\htmltag\tests;
 
 use drupol\htmltag\Attribute\AttributeFactory;
@@ -8,11 +10,9 @@ use PhpSpec\ObjectBehavior;
 
 class TestEscapeAttributesSpec extends ObjectBehavior
 {
-    public function let(AttributeFactory $attributeFactory)
+    public function it_cannot_be_escaped()
     {
-        $attributeFactory = new AttributeFactory();
-
-        $this->beConstructedWith($attributeFactory);
+        $this->shouldThrow(\Exception::class)->during('publicEscape');
     }
 
     public function it_is_initializable()
@@ -20,8 +20,10 @@ class TestEscapeAttributesSpec extends ObjectBehavior
         $this->shouldHaveType(TestEscapeAttributes::class);
     }
 
-    public function it_cannot_be_escaped()
+    public function let(AttributeFactory $attributeFactory)
     {
-        $this->shouldThrow(\Exception::class)->during('publicEscape');
+        $attributeFactory = new AttributeFactory();
+
+        $this->beConstructedWith($attributeFactory);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\AbstractBaseHtmlTagObject;
@@ -12,13 +14,6 @@ use drupol\htmltag\StringableInterface;
 class Tag extends AbstractBaseHtmlTagObject implements TagInterface
 {
     /**
-     * The tag name.
-     *
-     * @var string
-     */
-    private $tag;
-
-    /**
      * The tag attributes.
      *
      * @var \drupol\htmltag\Attributes\AttributesInterface
@@ -28,19 +23,25 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
     /**
      * The tag content.
      *
-     * @var mixed[]|null
+     * @var null|mixed[]
      */
     private $content;
+    /**
+     * The tag name.
+     *
+     * @var string
+     */
+    private $tag;
 
     /**
      * Tag constructor.
      *
      * @param \drupol\htmltag\Attributes\AttributesInterface $attributes
-     *   The attributes object.
+     *   The attributes object
      * @param string $name
-     *   The tag name.
+     *   The tag name
      * @param mixed $content
-     *   The content.
+     *   The content
      */
     public function __construct(AttributesInterface $attributes, $name, $content = null)
     {
@@ -71,13 +72,27 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
     /**
      * {@inheritdoc}
      */
+    public function alter(callable ...$closures)
+    {
+        foreach ($closures as $closure) {
+            $this->content = $closure(
+                $this->ensureFlatArray((array) $this->content)
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function attr($name = null, ...$value)
     {
-        if (null == $name) {
+        if (null === $name) {
             return $this->attributes->render();
         }
 
-        if ([] == $value) {
+        if ([] === $value) {
             return $this->attributes[$name];
         }
 
@@ -89,7 +104,7 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
      */
     public function content(...$data)
     {
-        if ([] != $data) {
+        if ([] !== $data) {
             if (null === \reset($data)) {
                 $data = null;
             }
@@ -101,25 +116,23 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
     }
 
     /**
+     * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
+     */
+    public function getContentAsArray()
+    {
+        return $this->preprocess(
+            $this->ensureFlatArray((array) $this->content)
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function render()
     {
         return null === ($content = $this->renderContent()) ?
-            \sprintf('<%s%s/>', $this->tag, $this->attributes->render()):
+            \sprintf('<%s%s/>', $this->tag, $this->attributes->render()) :
             \sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
-    }
-
-    /**
-     * Render the tag content.
-     *
-     * @return string|null
-     */
-    protected function renderContent()
-    {
-        return [] == ($items = \array_map([$this, 'escape'], $this->getContentAsArray())) ?
-            null:
-            \implode('', $items);
     }
 
     /**
@@ -145,20 +158,6 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
         $this->attributes = $this->attributes->import($unserialize['attributes']);
         $this->content = $unserialize['content'];
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function alter(callable ...$closures)
-    {
-        foreach ($closures as $closure) {
-            $this->content = $closure(
-                $this->ensureFlatArray((array) $this->content)
-            );
-        }
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -171,18 +170,20 @@ class Tag extends AbstractBaseHtmlTagObject implements TagInterface
             return $return;
         }
 
-        return null == $return ?
-            $return:
+        return null === $return ?
+            $return :
             \htmlentities($return);
     }
 
     /**
-     * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
+     * Render the tag content.
+     *
+     * @return null|string
      */
-    public function getContentAsArray()
+    protected function renderContent()
     {
-        return $this->preprocess(
-            $this->ensureFlatArray((array) $this->content)
-        );
+        return ($items = \array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
+            null :
+            \implode('', $items);
     }
 }

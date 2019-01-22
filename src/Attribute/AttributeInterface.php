@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attribute;
 
 use drupol\htmltag\AlterableInterface;
@@ -17,10 +19,47 @@ interface AttributeInterface extends
     AlterableInterface
 {
     /**
+     * {@inheritdoc}
+     *
+     * @return \drupol\htmltag\Attribute\AttributeInterface
+     */
+    public function alter(callable ...$closures);
+
+    /**
+     * Append a value to the attribute.
+     *
+     * @param null|mixed[]|string ...$value
+     *   The value to append.
+     *
+     * @return \drupol\htmltag\Attribute\AttributeInterface
+     *   The attribute
+     */
+    public function append(...$value);
+
+    /**
+     * Check if the attribute contains a string or a substring.
+     *
+     * @param mixed[]|string ...$substring
+     *   The string to check.
+     *
+     * @return bool
+     *   True or False
+     */
+    public function contains(...$substring);
+
+    /**
+     * Delete the current attribute.
+     *
+     * @return \drupol\htmltag\Attribute\AttributeInterface
+     *   The attribute
+     */
+    public function delete();
+
+    /**
      * Get the attribute name.
      *
      * @return string
-     *   The attribute name.
+     *   The attribute name
      */
     public function getName();
 
@@ -28,15 +67,15 @@ interface AttributeInterface extends
      * Get the attribute value as an array.
      *
      * @return array
-     *   The attribute value as an array.
+     *   The attribute value as an array
      */
     public function getValuesAsArray();
 
     /**
      * Get the attribute value as a string.
      *
-     * @return string|null
-     *   The attribute value as a string.
+     * @return null|string
+     *   The attribute value as a string
      */
     public function getValuesAsString();
 
@@ -44,14 +83,38 @@ interface AttributeInterface extends
      * Check if the attribute is a loner attribute.
      *
      * @return bool
-     *   True or False.
+     *   True or False
      */
     public function isBoolean();
 
     /**
+     * Remove a value from the attribute.
+     *
+     * @param array|string ...$value
+     *   The value to remove.
+     *
+     * @return \drupol\htmltag\Attribute\AttributeInterface
+     *   The attribute
+     */
+    public function remove(...$value);
+
+    /**
+     * Replace a value of the attribute.
+     *
+     * @param mixed[]|string $original
+     *   The original value
+     * @param mixed[]|string ...$replacement
+     *   The replacement value.
+     *
+     * @return \drupol\htmltag\Attribute\AttributeInterface
+     *   The attribute
+     */
+    public function replace($original, ...$replacement);
+
+    /**
      * Set the value.
      *
-     * @param string|array|null ...$value
+     * @param null|array|string ...$value
      *   The value.
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
@@ -60,74 +123,13 @@ interface AttributeInterface extends
     public function set(...$value);
 
     /**
-     * Append a value to the attribute.
-     *
-     * @param string|mixed[]|null ...$value
-     *   The value to append.
-     *
-     * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
-     */
-    public function append(...$value);
-
-    /**
-     * Remove a value from the attribute.
-     *
-     * @param string|array ...$value
-     *   The value to remove.
-     *
-     * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
-     */
-    public function remove(...$value);
-
-    /**
-     * Replace a value of the attribute.
-     *
-     * @param string|mixed[] $original
-     *   The original value.
-     * @param string|mixed[] ...$replacement
-     *   The replacement value.
-     *
-     * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
-     */
-    public function replace($original, ...$replacement);
-
-    /**
-     * Check if the attribute contains a string or a substring.
-     *
-     * @param string|mixed[] ...$substring
-     *   The string to check.
-     *
-     * @return bool
-     *   True or False.
-     */
-    public function contains(...$substring);
-
-    /**
      * Set the attribute as a loner attribute.
      *
      * @param bool $boolean
-     *   True or False.
+     *   True or False
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
+     *   The attribute
      */
     public function setBoolean($boolean = true);
-
-    /**
-     * Delete the current attribute.
-     *
-     * @return \drupol\htmltag\Attribute\AttributeInterface
-     *   The attribute.
-     */
-    public function delete();
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return \drupol\htmltag\Attribute\AttributeInterface
-     */
-    public function alter(callable ...$closures);
 }

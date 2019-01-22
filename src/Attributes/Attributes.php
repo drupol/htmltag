@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attributes;
 
 use drupol\htmltag\AbstractBaseHtmlTagObject;
@@ -11,6 +13,12 @@ use drupol\htmltag\Attribute\AttributeFactoryInterface;
 class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterface
 {
     /**
+     * The attribute factory.
+     *
+     * @var \drupol\htmltag\Attribute\AttributeFactoryInterface
+     */
+    private $attributeFactory;
+    /**
      * Stores the attribute data.
      *
      * @var \drupol\htmltag\Attribute\AttributeInterface[]
@@ -18,24 +26,111 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     private $storage = [];
 
     /**
-     * The attribute factory.
-     *
-     * @var \drupol\htmltag\Attribute\AttributeFactoryInterface
-     */
-    private $attributeFactory;
-
-    /**
      * Attributes constructor.
      *
      * @param \drupol\htmltag\Attribute\AttributeFactoryInterface $attributeFactory
-     *   The attribute factory.
+     *   The attribute factory
      * @param mixed[] $data
-     *   The input attributes.
+     *   The input attributes
      */
     public function __construct(AttributeFactoryInterface $attributeFactory, array $data = [])
     {
         $this->attributeFactory = $attributeFactory;
         $this->import($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function append($key, ...$values)
+    {
+        $this->storage += [
+            $key => $this->attributeFactory->getInstance($key),
+        ];
+
+        $this->storage[$key]->append($values);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($key, ...$values)
+    {
+        return $this->exists($key) && $this->storage[$key]->contains($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return $this->getStorage()->count();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(...$keys)
+    {
+        foreach ($this->ensureStrings($this->ensureFlatArray($keys)) as $key) {
+            unset($this->storage[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key, ...$values)
+    {
+        if (!isset($this->storage[$key])) {
+            return false;
+        }
+
+        return [] === $values ?
+            true :
+            $this->contains($key, $values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator()
+    {
+        return $this->getStorage();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStorage()
+    {
+        return new \ArrayIterator(\array_values($this->preprocess($this->storage)));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValuesAsArray()
+    {
+        $values = [];
+
+        foreach ($this->getStorage() as $attribute) {
+            $values[$attribute->getName()] = $attribute->getValuesAsArray();
+        }
+
+        return $values;
     }
 
     /**
@@ -53,11 +148,23 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     /**
      * {@inheritdoc}
      */
-    public function set($key, ...$value)
+    public function merge(array ...$dataset)
     {
-        $this->storage[$key] = $this->attributeFactory->getInstance($key, $value);
+        foreach ($dataset as $data) {
+            foreach ($data as $key => $value) {
+                $this->append($key, $value);
+            }
+        }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($key)
+    {
+        return isset($this->storage[$key]);
     }
 
     /**
@@ -91,28 +198,6 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($key)
-    {
-        return isset($this->storage[$key]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function append($key, ...$values)
-    {
-        $this->storage += [
-            $key => $this->attributeFactory->getInstance($key),
-        ];
-
-        $this->storage[$key]->append($values);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function remove($key, ...$values)
     {
         if (isset($this->storage[$key])) {
@@ -125,23 +210,15 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     /**
      * {@inheritdoc}
      */
-    public function delete(...$keys)
+    public function render()
     {
-        foreach ($this->ensureStrings($this->ensureFlatArray($keys)) as $key) {
-            unset($this->storage[$key]);
+        $output = '';
+
+        foreach ($this->getStorage() as $attribute) {
+            $output .= ' ' . $attribute;
         }
 
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function without(...$keys)
-    {
-        $attributes = clone $this;
-
-        return $attributes->delete($keys);
+        return $output;
     }
 
     /**
@@ -161,107 +238,21 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
     /**
      * {@inheritdoc}
      */
-    public function merge(array ...$dataset)
-    {
-        foreach ($dataset as $data) {
-            foreach ($data as $key => $value) {
-                $this->append($key, $value);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key, ...$values)
-    {
-        if (!isset($this->storage[$key])) {
-            return false;
-        }
-
-        return [] == $values ?
-            true:
-            $this->contains($key, $values);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function contains($key, ...$values)
-    {
-        return $this->exists($key) && $this->storage[$key]->contains($values);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->render();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function render()
-    {
-        $output = '';
-
-        foreach ($this->getStorage() as $attribute) {
-            $output .= ' ' . $attribute;
-        }
-        
-        return $output;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStorage()
-    {
-        return new \ArrayIterator(\array_values($this->preprocess($this->storage)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return $this->getStorage();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return $this->getStorage()->count();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValuesAsArray()
-    {
-        $values = [];
-
-        foreach ($this->getStorage() as $attribute) {
-            $values[$attribute->getName()] = $attribute->getValuesAsArray();
-        }
-
-        return $values;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         return \serialize([
             'storage' => $this->getValuesAsArray(),
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function set($key, ...$value)
+    {
+        $this->storage[$key] = $this->attributeFactory->getInstance($key, $value);
+
+        return $this;
     }
 
     /**
@@ -279,6 +270,16 @@ class Attributes extends AbstractBaseHtmlTagObject implements AttributesInterfac
             \array_keys($unserialize['storage']),
             \array_values($unserialize['storage'])
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function without(...$keys)
+    {
+        $attributes = clone $this;
+
+        return $attributes->delete($keys);
     }
 
     /**

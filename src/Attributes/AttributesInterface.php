@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace drupol\htmltag\Attributes;
 
 use drupol\htmltag\RenderableInterface;
@@ -17,91 +19,86 @@ interface AttributesInterface extends
     StringableInterface
 {
     /**
-     * Import attributes.
-     *
-     * @param array|\Traversable $data
-     *   The data to import.
-     *
-     * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     * {@inheritdoc}
      */
-    public function import($data);
-
-    /**
-     * Set an attribute.
-     *
-     * @param string $key
-     *   The attribute name.
-     * @param string|null ...$values
-     *   The attribute values.
-     *
-     * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
-     */
-    public function set($key, ...$values);
+    public function __toString();
 
     /**
      * Append a value into an attribute.
      *
      * @param string $key
-     *   The attribute's name.
-     * @param string|array ...$values
+     *   The attribute's name
+     * @param array|string ...$values
      *   The attribute's values.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
     public function append($key, ...$values);
 
     /**
-     * Remove a value from a specific attribute.
+     * Check if attribute contains a value.
      *
      * @param string $key
-     *   The attribute's name.
-     * @param string|array ...$values
-     *   The attribute's values.
+     *   Attribute name
+     * @param mixed[]|string ...$values
+     *   Attribute values.
      *
-     * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     * @return bool
+     *   Whereas an attribute contains a value
      */
-    public function remove($key, ...$values);
+    public function contains($key, ...$values);
 
     /**
      * Delete an attribute.
      *
-     * @param string|array ...$keys
+     * @param array|string ...$keys
      *   The name(s) of the attribute to delete.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
     public function delete(...$keys);
 
     /**
-     * Return the attributes without a specific attribute.
-     *
-     * @param string ...$keys
-     *   The name(s) of the attribute to remove.
-     *
-     * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
-     */
-    public function without(...$keys);
-
-    /**
-     * Replace a value with another.
+     * Check if an attribute exists and if a value if provided check it as well.
      *
      * @param string $key
-     *   The attributes's name.
-     * @param string $value
-     *   The attribute's value.
-     * @param array|string ...$replacements
-     *   The replacement values.
+     *   Attribute name
+     * @param mixed|string ...$values
+     *   The value to check if the attribute name exists.
+     *
+     * @return bool
+     *   True if the attribute exists, false otherwise
+     */
+    public function exists($key, ...$values);
+
+    /**
+     * Get storage.
+     *
+     * @return \ArrayIterator
+     *   The storage array
+     */
+    public function getStorage();
+
+    /**
+     * Get the values as an array.
+     *
+     * @return array
+     *   The attributes values keyed by the attribute name
+     */
+    public function getValuesAsArray();
+
+    /**
+     * Import attributes.
+     *
+     * @param array|\Traversable $data
+     *   The data to import
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
-    public function replace($key, $value, ...$replacements);
+    public function import($data);
 
     /**
      * Merge attributes.
@@ -110,54 +107,59 @@ interface AttributesInterface extends
      *   The data to merge.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
-     *   The attributes.
+     *   The attributes
      */
     public function merge(array ...$dataset);
 
     /**
-     * Check if an attribute exists and if a value if provided check it as well.
+     * Remove a value from a specific attribute.
      *
      * @param string $key
-     *   Attribute name.
-     * @param string|mixed ...$values
-     *   The value to check if the attribute name exists.
+     *   The attribute's name
+     * @param array|string ...$values
+     *   The attribute's values.
      *
-     * @return bool
-     *   True if the attribute exists, false otherwise.
+     * @return \drupol\htmltag\Attributes\AttributesInterface
+     *   The attributes
      */
-    public function exists($key, ...$values);
+    public function remove($key, ...$values);
 
     /**
-     * Check if attribute contains a value.
+     * Replace a value with another.
      *
      * @param string $key
-     *   Attribute name.
-     * @param string|mixed[] ...$values
-     *   Attribute values.
+     *   The attributes's name
+     * @param string $value
+     *   The attribute's value
+     * @param array|string ...$replacements
+     *   The replacement values.
      *
-     * @return bool
-     *   Whereas an attribute contains a value.
+     * @return \drupol\htmltag\Attributes\AttributesInterface
+     *   The attributes
      */
-    public function contains($key, ...$values);
+    public function replace($key, $value, ...$replacements);
 
     /**
-     * Get storage.
+     * Set an attribute.
      *
-     * @return \ArrayIterator
-     *   The storage array.
+     * @param string $key
+     *   The attribute name
+     * @param null|string ...$values
+     *   The attribute values.
+     *
+     * @return \drupol\htmltag\Attributes\AttributesInterface
+     *   The attributes
      */
-    public function getStorage();
+    public function set($key, ...$values);
 
     /**
-     * {@inheritdoc}
-     */
-    public function __toString();
-
-    /**
-     * Get the values as an array.
+     * Return the attributes without a specific attribute.
      *
-     * @return array
-     *   The attributes values keyed by the attribute name.
+     * @param string ...$keys
+     *   The name(s) of the attribute to remove.
+     *
+     * @return \drupol\htmltag\Attributes\AttributesInterface
+     *   The attributes
      */
-    public function getValuesAsArray();
+    public function without(...$keys);
 }
