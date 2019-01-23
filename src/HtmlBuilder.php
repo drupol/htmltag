@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace drupol\htmltag;
 
 use drupol\htmltag\Tag\TagFactory;
+use drupol\htmltag\Tag\TagInterface;
 
 /**
  * Class HtmlBuilder.
@@ -35,15 +36,9 @@ final class HtmlBuilder implements StringableInterface
                 return $this;
             }
 
-            $comment = HtmlTag::tag('!--', [], $arguments[0]);
-
-            if (null !== $this->scope) {
-                $this->scope->content($this->scope->getContentAsArray(), $comment);
-            } else {
-                $this->storage[] = $comment;
-            }
-
-            return $this;
+            return $this->update(
+                HtmlTag::tag('!--', [], $arguments[0])
+            );
         }
 
         if ('_' === $name) {
@@ -54,15 +49,7 @@ final class HtmlBuilder implements StringableInterface
 
         $tag = TagFactory::build($name, ...$arguments);
 
-        if (null !== $this->scope) {
-            $this->scope->content($this->scope->getContentAsArray(), $tag);
-        } else {
-            $this->storage[] = $tag;
-        }
-
-        $this->scope = $tag;
-
-        return $this;
+        return $this->update($tag, true);
     }
 
     /**
@@ -77,5 +64,31 @@ final class HtmlBuilder implements StringableInterface
         }
 
         return $output;
+    }
+
+    /**
+     * Add the current tag to the stack.
+     *
+     * @param \drupol\htmltag\Tag\TagInterface $tag
+     *   The tag
+     * @param bool $updateScope
+     *   True if the current scope needs to be updated
+     *
+     * @return \drupol\htmltag\HtmlBuilder
+     *   The HTML Builder object
+     */
+    private function update(TagInterface $tag, $updateScope = false)
+    {
+        if (null !== $this->scope) {
+            $this->scope->content($this->scope->getContentAsArray(), $tag);
+        } else {
+            $this->storage[] = $tag;
+        }
+
+        if (true === $updateScope) {
+            $this->scope = $tag;
+        }
+
+        return $this;
     }
 }

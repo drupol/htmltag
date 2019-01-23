@@ -33,7 +33,7 @@ abstract class AbstractBaseHtmlTagObject
     {
         $flat = [];
 
-        while ($data) {
+        while (!empty($data)) {
             $value = \array_shift($data);
 
             if (\is_array($value)) {
