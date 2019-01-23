@@ -124,43 +124,6 @@ We could have used a Trait instead, but I don't like working with traits.
 
 
 
-<tr id="_ensureStrings">
-
-    <td class="attributes col-md-1">
-        <code class="keyword">
-                 protected 
-                
-                
-        </code>
-    </td>
-
-    <td class="name">
-        <div>
-            <a class="anchor pull-right" href="#_ensureStrings">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#28-39">ensureStrings</a>( <span> array <span class="property-name">$values</span> </span> )</code>
-
-            <div class="description">
-                Make sure that the value parameters is converted into an
-array of strings.
-
-Only simple arrays (no nested arrays) are allowed here.
-Values that cannot be converted to strings will be removed from the
-resulting array.
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </td>
-</tr>
-
-
-
 <tr id="_ensureFlatArray">
 
     <td class="attributes col-md-1">
@@ -174,7 +137,7 @@ resulting array.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_ensureFlatArray">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#57-74">ensureFlatArray</a>( <span> array <span class="property-name">$data</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#32-49">ensureFlatArray</a>( <span> array <span class="property-name">$data</span> </span> )</code>
 
             <div class="description">
                 Transform a multidimensional array into a flat array.
@@ -215,7 +178,7 @@ But it seems to be even slower.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_ensureString">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#88-117">ensureString</a>( <span> mixed <span class="property-name">$data</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#63-92">ensureString</a>( <span> mixed <span class="property-name">$data</span> </span> )</code>
 
             <div class="description">
                 Convert a value into a string when it's possible.
@@ -237,7 +200,7 @@ When it's not possible, the "null" value is returned instead.
 
 
 
-<tr id="_preprocess">
+<tr id="_ensureStrings">
 
     <td class="attributes col-md-1">
         <code class="keyword">
@@ -249,14 +212,16 @@ When it's not possible, the "null" value is returned instead.
 
     <td class="name">
         <div>
-            <a class="anchor pull-right" href="#_preprocess">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#133-136">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> string|null <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span> )</code>
+            <a class="anchor pull-right" href="#_ensureStrings">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#108-119">ensureStrings</a>( <span> array <span class="property-name">$values</span> </span> )</code>
 
             <div class="description">
-                Preprocess values before being used.
+                Make sure that the value parameters is converted into an
+array of strings.
 
-This is useful when extending the parent class and implementing this
-method.
+Only simple arrays (no nested arrays) are allowed here.
+Values that cannot be converted to strings will be removed from the
+resulting array.
 
 
 
@@ -285,10 +250,45 @@ method.
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_escape">#</a>
-            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#147">escape</a>( <span> string|\drupol\htmltag\StringableInterface <span class="property-name">$value</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#130">escape</a>( <span> \drupol\htmltag\StringableInterface|string <span class="property-name">$value</span> </span> )</code>
 
             <div class="description">
                 Escape a value.
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr id="_preprocess">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 protected 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_preprocess">#</a>
+            <code><a href="source-class-drupol.htmltag.AbstractBaseHtmlTagObject.html#146-149">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> null|string <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span> )</code>
+
+            <div class="description">
+                Preprocess values before being used.
+
+This is useful when extending the parent class and implementing this
+method.
 
 
 
