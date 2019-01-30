@@ -15,7 +15,9 @@
     },
     "require-dev": {
         "drupol/php-conventions": "^1",
-        "scrutinizer/ocular": "^1"
+        "scrutinizer/ocular": "^1",
+        "apigen/apigen": "dev-master",
+        "roave/better-reflection": "dev-master#c87d856"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +40,6 @@
         "phpcs": "./vendor/bin/phpcs --ignore=vendor .",
         "phpcbf": "./vendor/bin/phpcbf --ignore=vendor .",
         "infection": "./vendor/bin/infection run -j 10",
-        "codacy": "./vendor/bin/codacycoverage clover build/logs/clover.xml",
         "scrutinizer": "./vendor/bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml",
         "bench": "./vendor/bin/phpbench run --report=aggregate --store --precision=3"
     },
