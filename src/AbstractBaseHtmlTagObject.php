@@ -69,17 +69,20 @@ abstract class AbstractBaseHtmlTagObject
                 $return = $data;
 
                 break;
+
             case 'integer':
             case 'double':
                 $return = (string) $data;
 
                 break;
+
             case 'object':
                 if (\method_exists($data, '__toString')) {
                     $return = $data->__toString();
                 }
 
                 break;
+
             case 'boolean':
             case 'array':
             default:
