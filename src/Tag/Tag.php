@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\AbstractBaseHtmlTagObject;
