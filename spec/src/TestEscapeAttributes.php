@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace drupol\htmltag\tests;
 
-use drupol\htmltag\Attributes\Attributes;
+use drupol\htmltag\Attributes\AbstractAttributes;
 
-class TestEscapeAttributes extends Attributes
+class TestEscapeAttributes extends AbstractAttributes
 {
     /**
      * @return null|string|void

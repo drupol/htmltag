@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace drupol\atomium\tests;
 
-use drupol\htmltag\Attribute\Attribute;
+use drupol\htmltag\Attribute\AbstractAttribute;
 
-class ValidAttributeClass extends Attribute
+class ValidAttributeClass extends AbstractAttribute
 {
 }

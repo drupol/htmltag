@@ -5,7 +5,7 @@ namespace drupol\htmltag\Tag;
 /**
  * Class Comment.
  */
-class Comment extends Tag
+final class Comment extends AbstractTag
 {
     /**
      * {@inheritdoc}
