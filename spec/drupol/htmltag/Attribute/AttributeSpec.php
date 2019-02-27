@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace spec\drupol\htmltag\Attribute;
 
 use drupol\htmltag\Attribute\Attribute;
