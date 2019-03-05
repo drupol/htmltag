@@ -9,7 +9,7 @@ use drupol\htmltag\Tag\TagFactory;
 /**
  * Class HtmlTag.
  */
-class HtmlTag implements HtmlTagInterface
+final class HtmlTag implements HtmlTagInterface
 {
     /**
      * {@inheritdoc}

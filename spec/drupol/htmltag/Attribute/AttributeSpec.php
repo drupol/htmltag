@@ -168,26 +168,6 @@ class AttributeSpec extends ObjectBehavior
         $this->delete()->render()->shouldBe('');
     }
 
-    public function it_can_escape_values()
-    {
-        $unsafe_object = new randomPrintableObject('"<a href="#unsafe">Unsafe value</a>');
-
-        $this->beConstructedWith('class');
-        $this->append('hello');
-        $this->append($unsafe_object);
-        $this->append($unsafe_object->__toString());
-
-        $this->render()->shouldReturn('class="hello &quot;&lt;a href=&quot;#unsafe&quot;&gt;Unsafe value&lt;/a&gt; &quot;&lt;a href=&quot;#unsafe&quot;&gt;Unsafe value&lt;/a&gt;"');
-
-        $this
-            ->getValuesAsArray()
-            ->shouldReturn([
-                'hello',
-                $unsafe_object->__toString(),
-                $unsafe_object->__toString(),
-            ]);
-    }
-
     public function it_can_remove_values()
     {
         $this->beConstructedWith('name', null);

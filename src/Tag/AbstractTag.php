@@ -114,6 +114,22 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function escape($value)
+    {
+        $return = $this->ensureString($value);
+
+        if ($value instanceof StringableInterface) {
+            return $return;
+        }
+
+        return null === $return ?
+            $return :
+            \htmlentities($return);
+    }
+
+    /**
      * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
      */
     public function getContentAsArray()
@@ -121,6 +137,14 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         return $this->preprocess(
             $this->ensureFlatArray((array) $this->content)
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preprocess(array $values, array $context = [])
+    {
+        return $values;
     }
 
     /**
@@ -155,22 +179,6 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         $this->tag = $unserialize['tag'];
         $this->attributes = $this->attributes->import($unserialize['attributes']);
         $this->content = $unserialize['content'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function escape($value)
-    {
-        $return = $this->ensureString($value);
-
-        if ($value instanceof StringableInterface) {
-            return $return;
-        }
-
-        return null === $return ?
-            $return :
-            \htmlentities($return);
     }
 
     /**

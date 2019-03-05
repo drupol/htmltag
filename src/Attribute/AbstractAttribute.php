@@ -108,6 +108,16 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
+    public function escape($value)
+    {
+        return null === $value ?
+                $value :
+                \htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -121,7 +131,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
         return $this->ensureStrings(
             $this->preprocess(
                 $this->ensureFlatArray($this->values),
-                $this->name
+                ['name' => $this->name]
             )
         );
     }
@@ -133,7 +143,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     {
         return ($values = $this->getValuesAsArray()) === [] ?
             null :
-            $this->escape(\implode(' ', \array_filter($values, '\strlen')));
+            (string) $this->escape(\implode(' ', \array_filter($values, '\strlen')));
     }
 
     /**
@@ -174,6 +184,14 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     public function offsetUnset($offset)
     {
         $this->remove($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preprocess(array $values, array $context = [])
+    {
+        return $values;
     }
 
     /**
@@ -254,21 +272,5 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
 
         $this->name = $unserialized['name'];
         $this->values = $unserialized['values'];
-    }
-
-    /**
-     * Escape a value.
-     *
-     * @param null|string $value
-     *   The value to sanitize
-     *
-     * @return mixed|string
-     *   The value sanitized
-     */
-    protected function escape($value)
-    {
-        return null === $value ?
-                $value :
-                \htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }

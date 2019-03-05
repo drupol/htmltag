@@ -118,34 +118,4 @@ abstract class AbstractBaseHtmlTagObject
             )
         );
     }
-
-    /**
-     * Escape a value.
-     *
-     * @param \drupol\htmltag\StringableInterface|string $value
-     *   The value to escape
-     *
-     * @return null|string
-     *   The value escaped
-     */
-    abstract protected function escape($value);
-
-    /**
-     * Preprocess values before being used.
-     *
-     * This is useful when extending the parent class and implementing this
-     * method.
-     *
-     * @param mixed[] $values
-     *   The raw values
-     * @param null|string $name
-     *   The name of the object is any
-     *
-     * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
-     *   The values
-     */
-    protected function preprocess(array $values, $name = null)
-    {
-        return $values;
-    }
 }

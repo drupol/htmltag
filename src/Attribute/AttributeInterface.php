@@ -3,6 +3,8 @@
 namespace drupol\htmltag\Attribute;
 
 use drupol\htmltag\AlterableInterface;
+use drupol\htmltag\EscapableInterface;
+use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
 
@@ -14,7 +16,9 @@ interface AttributeInterface extends
     \Serializable,
     StringableInterface,
     RenderableInterface,
-    AlterableInterface
+    AlterableInterface,
+    PreprocessableInterface,
+    EscapableInterface
 {
     /**
      * {@inheritdoc}

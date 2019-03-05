@@ -2,6 +2,7 @@
 
 namespace drupol\htmltag\Attributes;
 
+use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
 
@@ -14,7 +15,8 @@ interface AttributesInterface extends
     \Countable,
     \Serializable,
     RenderableInterface,
-    StringableInterface
+    StringableInterface,
+    PreprocessableInterface
 {
     /**
      * {@inheritdoc}

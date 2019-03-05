@@ -3,13 +3,21 @@
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\AlterableInterface;
+use drupol\htmltag\EscapableInterface;
+use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
 
 /**
  * Interface TagInterface.
  */
-interface TagInterface extends \Serializable, RenderableInterface, StringableInterface, AlterableInterface
+interface TagInterface extends
+    \Serializable,
+    RenderableInterface,
+    StringableInterface,
+    AlterableInterface,
+    PreprocessableInterface,
+    EscapableInterface
 {
     /**
      * Get the attributes as string or a specific attribute if $name is provided.

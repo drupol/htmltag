@@ -78,18 +78,6 @@ class TagSpec extends ObjectBehavior
         $this->render()->shouldReturn('<p class="hello class">hello content</p>');
     }
 
-    public function it_can_escape_content()
-    {
-        $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, 'p');
-
-        $unsafe_object = new randomPrintableObject('"<a href="#unsafe">Unsafe value</a>');
-
-        $this->content('hello content', 'goodbye content', $unsafe_object, true, null, false, $unsafe_object->__toString());
-
-        $this->render()->shouldReturn('<p>hello contentgoodbye content"<a href="#unsafe">Unsafe value</a>&quot;&lt;a href=&quot;#unsafe&quot;&gt;Unsafe value&lt;/a&gt;</p>');
-    }
-
     public function it_is_initializable()
     {
         $this->shouldHaveType(Tag::class);

@@ -196,6 +196,14 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
     /**
      * {@inheritdoc}
      */
+    public function preprocess(array $values, array $context = [])
+    {
+        return $values;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function remove($key, ...$values)
     {
         if (isset($this->storage[$key])) {
@@ -278,13 +286,5 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         $attributes = clone $this;
 
         return $attributes->delete($keys);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function escape($value)
-    {
-        throw new \BadMethodCallException('Unsupported method.');
     }
 }
