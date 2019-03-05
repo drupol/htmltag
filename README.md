@@ -257,21 +257,18 @@ class MyCustomAttributeClass extends \drupol\htmltag\Attribute\Attribute {
     /**
      * {@inheritdoc}
      */
-    protected function preprocess(array $values, $name = NULL) {
-        // Special handling for "class" attribute.
-        if ('class' === $name) {
-            // Remove duplicated values.
-            $values = array_unique($values);
+    protected function preprocess(array $values, array $context = []) {
+        // Remove duplicated values.
+        $values = array_unique($values);
 
-            // Trim values.
-            $values = array_map('trim', $values);
+        // Trim values.
+        $values = array_map('trim', $values);
 
-            // Convert to lower case
-            $values = array_map('strtolower', $values);
+        // Convert to lower case
+        $values = array_map('strtolower', $values);
 
-            // Sort values.
-            natcasesort($values);
-        }
+        // Sort values.
+        natcasesort($values);
 
         return $values;
     }
