@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="resources/style.css">
 
         <title>
-            Interface drupol\htmltag\Tag\TagInterface | HTMLTag API documentation
+            Interface drupol\htmltag\PreprocessableInterface | HTMLTag API documentation
         </title>
     </head>
 
@@ -78,13 +78,9 @@
         <li>
             <a href="namespace-drupol.htmltag.html">htmltag</a>
         </li>
-            <li class="backslash">\</li>
-        <li>
-            <a href="namespace-drupol.htmltag.Tag.html">Tag</a>
-        </li>
 
         <li class="backslash">\</li>
-        <li class="active">TagInterface</li>
+        <li class="active">PreprocessableInterface</li>
 </ol>
                         </div>
                     </div>
@@ -94,29 +90,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-    <h1>TagInterface</h1>
+    <h1>PreprocessableInterface</h1>
 
         <div class="panel panel-default">
             <div class="panel-body">
-                Interface TagInterface.
+                Interface PreprocessableInterface.
             </div>
         </div>
 
-        <dl class="tree">
-            <dd>
-                implements
-                    <a href="interface-Serializable.html">Serializable</a>, 
-                    <a href="interface-drupol.htmltag.AlterableInterface.html">drupol\htmltag\AlterableInterface</a>, 
-                    <a href="interface-drupol.htmltag.EscapableInterface.html">drupol\htmltag\EscapableInterface</a>, 
-                    <a href="interface-drupol.htmltag.PreprocessableInterface.html">drupol\htmltag\PreprocessableInterface</a>, 
-                    <a href="interface-drupol.htmltag.RenderableInterface.html">drupol\htmltag\RenderableInterface</a>, 
-                    <a href="interface-drupol.htmltag.StringableInterface.html">drupol\htmltag\StringableInterface</a>
-            </dd>
-        </dl>
 
         <div>
             <h2>Known implementers</h2>
             <p>
+                    <a href="class-drupol.htmltag.Attribute.AbstractAttribute.html">
+                        drupol\htmltag\Attribute\AbstractAttribute
+                    </a>, 
+                    <a href="class-drupol.htmltag.Attribute.Attribute.html">
+                        drupol\htmltag\Attribute\Attribute
+                    </a>, 
+                    <a href="interface-drupol.htmltag.Attribute.AttributeInterface.html">
+                        drupol\htmltag\Attribute\AttributeInterface
+                    </a>, 
+                    <a href="class-drupol.htmltag.Attributes.AbstractAttributes.html">
+                        drupol\htmltag\Attributes\AbstractAttributes
+                    </a>, 
+                    <a href="class-drupol.htmltag.Attributes.Attributes.html">
+                        drupol\htmltag\Attributes\Attributes
+                    </a>, 
+                    <a href="interface-drupol.htmltag.Attributes.AttributesInterface.html">
+                        drupol\htmltag\Attributes\AttributesInterface
+                    </a>, 
                     <a href="class-drupol.htmltag.Tag.AbstractTag.html">
                         drupol\htmltag\Tag\AbstractTag
                     </a>, 
@@ -125,12 +128,15 @@
                     </a>, 
                     <a href="class-drupol.htmltag.Tag.Tag.html">
                         drupol\htmltag\Tag\Tag
+                    </a>, 
+                    <a href="interface-drupol.htmltag.Tag.TagInterface.html">
+                        drupol\htmltag\Tag\TagInterface
                     </a>
             </p>
         </div>
 
     <div class="info">
-            <a href="source-interface-drupol.htmltag.Tag.TagInterface.html" class="open-source-code">Open source code</a>
+            <a href="source-interface-drupol.htmltag.PreprocessableInterface.html" class="open-source-code">Open source code</a>
         <br>
     </div>
 
@@ -139,7 +145,7 @@
 
 
 
-<tr id="_attr">
+<tr id="_preprocess">
 
     <td class="attributes col-md-1">
         <code class="keyword">
@@ -150,71 +156,11 @@
 
     <td class="name">
         <div>
-            <a class="anchor pull-right" href="#_attr">#</a>
-            <code><a href="source-interface-drupol.htmltag.Tag.TagInterface.html#33">attr</a>( <span> string <span class="property-name">$name</span> = <span class="php-keyword1">NULL</span></span>, <span> mixed <span class="property-name">$value</span> ,…</span> )</code>
+            <a class="anchor pull-right" href="#_preprocess">#</a>
+            <code><a href="source-interface-drupol.htmltag.PreprocessableInterface.html#21">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> array <span class="property-name">$context</span> = <span class="php-keyword1">array</span> ( )</span> )</code>
 
             <div class="description">
-                Get the attributes as string or a specific attribute if $name is provided.
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </td>
-</tr>
-
-
-
-<tr id="_content">
-
-    <td class="attributes col-md-1">
-        <code class="keyword">
-                
-                public
-        </code>
-    </td>
-
-    <td class="name">
-        <div>
-            <a class="anchor pull-right" href="#_content">#</a>
-            <code><a href="source-interface-drupol.htmltag.Tag.TagInterface.html#44">content</a>( <span> mixed <span class="property-name">$data</span> ,…</span> )</code>
-
-            <div class="description">
-                Set or get the content.
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </td>
-</tr>
-
-
-
-<tr id="_getContentAsArray">
-
-    <td class="attributes col-md-1">
-        <code class="keyword">
-                
-                public
-        </code>
-    </td>
-
-    <td class="name">
-        <div>
-            <a class="anchor pull-right" href="#_getContentAsArray">#</a>
-            <code><a href="source-interface-drupol.htmltag.Tag.TagInterface.html#52">getContentAsArray</a>( )</code>
-
-            <div class="description">
-                Get the content.
+                Preprocess the values of an object.
 
 
 

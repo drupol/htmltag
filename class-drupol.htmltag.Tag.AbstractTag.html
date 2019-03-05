@@ -116,6 +116,12 @@
                         <a href="interface-drupol.htmltag.AlterableInterface.html">
                             drupol\htmltag\AlterableInterface
                         </a>, 
+                        <a href="interface-drupol.htmltag.EscapableInterface.html">
+                            drupol\htmltag\EscapableInterface
+                        </a>, 
+                        <a href="interface-drupol.htmltag.PreprocessableInterface.html">
+                            drupol\htmltag\PreprocessableInterface
+                        </a>, 
                         <a href="interface-drupol.htmltag.RenderableInterface.html">
                             drupol\htmltag\RenderableInterface
                         </a>, 
@@ -372,6 +378,46 @@
 
 
 
+<tr id="_escape">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 public 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_escape">#</a>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#119-130">escape</a>( <span> <span class="property-name">$value</span> </span> )</code>
+
+            <div class="description">
+                {@inheritdoc}
+
+
+
+
+
+
+
+
+                        <h2>Implementation of</h2>
+                        <div>
+                            <code>
+                                <a href="interface-drupol.htmltag.EscapableInterface.html#_escape">
+                                    drupol\htmltag\EscapableInterface::escape()
+                                </a>
+                            </code>
+                        </div>
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
 <tr id="_getContentAsArray">
 
     <td class="attributes col-md-1">
@@ -385,7 +431,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_getContentAsArray">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#119-122">getContentAsArray</a>( )</code>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#135-140">getContentAsArray</a>( )</code>
 
             <div class="description">
                 
@@ -412,6 +458,46 @@
 
 
 
+<tr id="_preprocess">
+
+    <td class="attributes col-md-1">
+        <code class="keyword">
+                 public 
+                
+                
+        </code>
+    </td>
+
+    <td class="name">
+        <div>
+            <a class="anchor pull-right" href="#_preprocess">#</a>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#145-148">preprocess</a>( <span> array <span class="property-name">$values</span> </span>, <span> array <span class="property-name">$context</span> = <span class="php-keyword1">array</span> ( )</span> )</code>
+
+            <div class="description">
+                {@inheritdoc}
+
+
+
+
+
+
+
+
+                        <h2>Implementation of</h2>
+                        <div>
+                            <code>
+                                <a href="interface-drupol.htmltag.PreprocessableInterface.html#_preprocess">
+                                    drupol\htmltag\PreprocessableInterface::preprocess()
+                                </a>
+                            </code>
+                        </div>
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+
 <tr id="_render">
 
     <td class="attributes col-md-1">
@@ -425,7 +511,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_render">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#127-132">render</a>( )</code>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#153-158">render</a>( )</code>
 
             <div class="description">
                 {@inheritdoc}
@@ -465,7 +551,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_serialize">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#137-144">serialize</a>( )</code>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#163-170">serialize</a>( )</code>
 
             <div class="description">
                 {@inheritdoc}
@@ -505,7 +591,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_unserialize">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#149-156">unserialize</a>( <span> <span class="property-name">$serialized</span> </span> )</code>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#175-182">unserialize</a>( <span> <span class="property-name">$serialized</span> </span> )</code>
 
             <div class="description">
                 {@inheritdoc}
@@ -532,38 +618,6 @@
 
 
 
-<tr id="_escape">
-
-    <td class="attributes col-md-1">
-        <code class="keyword">
-                 protected 
-                
-                
-        </code>
-    </td>
-
-    <td class="name">
-        <div>
-            <a class="anchor pull-right" href="#_escape">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#161-172">escape</a>( <span> <span class="property-name">$value</span> </span> )</code>
-
-            <div class="description">
-                {@inheritdoc}
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-    </td>
-</tr>
-
-
-
 <tr id="_renderContent">
 
     <td class="attributes col-md-1">
@@ -577,7 +631,7 @@
     <td class="name">
         <div>
             <a class="anchor pull-right" href="#_renderContent">#</a>
-            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#179-184">renderContent</a>( )</code>
+            <code><a href="source-class-drupol.htmltag.Tag.AbstractTag.html#189-194">renderContent</a>( )</code>
 
             <div class="description">
                 Render the tag content.
