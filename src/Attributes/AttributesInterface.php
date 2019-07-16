@@ -11,12 +11,12 @@ use drupol\htmltag\StringableInterface;
  */
 interface AttributesInterface extends
     \ArrayAccess,
-    \IteratorAggregate,
     \Countable,
+    \IteratorAggregate,
     \Serializable,
+    PreprocessableInterface,
     RenderableInterface,
-    StringableInterface,
-    PreprocessableInterface
+    StringableInterface
 {
     /**
      * {@inheritdoc}

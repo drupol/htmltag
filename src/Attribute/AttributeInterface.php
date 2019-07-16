@@ -14,11 +14,11 @@ use drupol\htmltag\StringableInterface;
 interface AttributeInterface extends
     \ArrayAccess,
     \Serializable,
-    StringableInterface,
-    RenderableInterface,
     AlterableInterface,
+    EscapableInterface,
     PreprocessableInterface,
-    EscapableInterface
+    RenderableInterface,
+    StringableInterface
 {
     /**
      * {@inheritdoc}

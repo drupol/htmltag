@@ -15,7 +15,7 @@ class AttributeSpec extends ObjectBehavior
 
         $this
             ->alter(
-                function ($values) {
+                static function ($values) {
                     return \array_map('strtoupper', $values);
                 }
             )
@@ -24,7 +24,7 @@ class AttributeSpec extends ObjectBehavior
 
         $this
             ->alter(
-                function (array $values) {
+                static function (array $values) {
                     $values[] = 'foo';
                     $values[] = '0';
                     $values[] = [

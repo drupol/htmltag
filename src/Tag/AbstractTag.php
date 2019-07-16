@@ -24,6 +24,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      * @var null|mixed[]
      */
     private $content;
+
     /**
      * The tag name.
      *

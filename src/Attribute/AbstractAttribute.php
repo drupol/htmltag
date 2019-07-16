@@ -85,7 +85,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
         return !\in_array(
             false,
             \array_map(
-                function ($substring_item) use ($values) {
+                static function ($substring_item) use ($values) {
                     return \in_array($substring_item, $values, true);
                 },
                 $this->ensureFlatArray($substring)
@@ -112,7 +112,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     {
         return null === $value ?
                 $value :
-                \htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE);
+                \htmlspecialchars($value, \ENT_QUOTES | \ENT_SUBSTITUTE);
     }
 
     /**

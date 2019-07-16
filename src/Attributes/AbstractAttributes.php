@@ -16,6 +16,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
      * @var \drupol\htmltag\Attribute\AttributeFactoryInterface
      */
     private $attributeFactory;
+
     /**
      * Stores the attribute data.
      *
@@ -270,7 +271,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         $attributeFactory = $this->attributeFactory;
 
         $this->storage = \array_map(
-            function ($key, $values) use ($attributeFactory) {
+            static function ($key, $values) use ($attributeFactory) {
                 return $attributeFactory::build($key, $values);
             },
             \array_keys($unserialize['storage']),

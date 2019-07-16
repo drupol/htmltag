@@ -13,11 +13,11 @@ use drupol\htmltag\StringableInterface;
  */
 interface TagInterface extends
     \Serializable,
-    RenderableInterface,
-    StringableInterface,
     AlterableInterface,
+    EscapableInterface,
     PreprocessableInterface,
-    EscapableInterface
+    RenderableInterface,
+    StringableInterface
 {
     /**
      * Get the attributes as string or a specific attribute if $name is provided.

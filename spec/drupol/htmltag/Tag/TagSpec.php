@@ -17,7 +17,7 @@ class TagSpec extends ObjectBehavior
         $this->render()->shouldReturn('<p/>');
 
         $this
-            ->alter(function (array $values) {
+            ->alter(static function (array $values) {
                 return \array_map('strtoupper', $values);
             })
             ->render()
@@ -26,14 +26,14 @@ class TagSpec extends ObjectBehavior
         $this->content('hello content', 'goodbye content');
 
         $this
-            ->alter(function (array $values) {
+            ->alter(static function (array $values) {
                 return \array_map('strtoupper', $values);
             })
             ->render()
             ->shouldReturn('<p>HELLO CONTENTGOODBYE CONTENT</p>');
 
         $this
-            ->alter(function (array $values) {
+            ->alter(static function (array $values) {
                 $values[] = '<a href="#htmltag">htmltag</a>';
                 $values[] = new \stdClass();
                 $values[] = [
