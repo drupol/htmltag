@@ -1,13 +1,14 @@
-[![Latest Stable Version](https://poser.pugx.org/drupol/htmltag/v/stable)](https://packagist.org/packages/drupol/htmltag)
- [![Total Downloads](https://poser.pugx.org/drupol/htmltag/downloads)](https://packagist.org/packages/drupol/htmltag)
- [![Build Status](https://travis-ci.org/drupol/htmltag.svg?branch=master)](https://travis-ci.org/drupol/htmltag)
- [![Build status](https://ci.appveyor.com/api/projects/status/bfo6bgublcdwxl0r/branch/master?svg=true)](https://ci.appveyor.com/project/drupol/htmltag/branch/master)
- [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/drupol/htmltag/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
- [![Code Coverage](https://scrutinizer-ci.com/g/drupol/htmltag/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/123c1ea942b14393b04d87864f165a53)](https://www.codacy.com/app/drupol/htmltag)
+[![Latest Stable Version](https://img.shields.io/packagist/v/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
+ [![GitHub stars](https://img.shields.io/github/stars/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
+ [![Total Downloads](https://img.shields.io/packagist/dt/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
+ [![Build Status](https://img.shields.io/travis/drupol/htmltag/master.svg?style=flat-square)](https://travis-ci.org/drupol/htmltag)
+ [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/drupol/htmltag/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
+ [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/drupol/htmltag/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
  [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/drupol/htmltag/master)](https://stryker-mutator.github.io)
- [![License](https://poser.pugx.org/drupol/htmltag/license)](https://packagist.org/packages/drupol/htmltag)
-
+ [![License](https://img.shields.io/packagist/l/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
+ [![Say Thanks!](https://img.shields.io/badge/Say-thanks-brightgreen.svg?style=flat-square)](https://saythanks.io/to/drupol)
+ [![Donate!](https://img.shields.io/badge/Donate-Paypal-brightgreen.svg?style=flat-square)](https://paypal.me/drupol)
+ 
 # HTMLTag
 
 ## Description
@@ -23,11 +24,15 @@ The focus is on security, speed and usability.
 
 ## Installation
 
-```composer require drupol/htmltag --dev```
+```composer require drupol/htmltag```
 
 ## Usage
 
 ```php
+<?php
+
+include 'vendor/autoload.php';
+
 // Meta object.
 $meta = \drupol\htmltag\HtmlTag::tag('meta', ['name' => 'author']);
 $meta->attr('content', 'pol dellaiera');
@@ -76,7 +81,12 @@ Will print:
 The library comes with an HTML Builder class that allows you to quickly create HTML content.
 
 ```php
-$builder = new HtmlBuilder();
+<?php 
+
+include 'vendor/autoload.php';
+
+$builder = new \drupol\htmltag\HtmlBuilder();
+
 $html = $builder
     ->c(' Comment 1 ') // Add a comment
     ->p(['class' => ['paragraph']], 'some content')
@@ -164,6 +174,10 @@ The allowed type of values can be almost anything. If it's an object, it must im
 Method chaining:
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag
     ->attr('class', ['FRONT', ['NODE', ['sidebra']], 'node', '  a', '  b  ', [' c']])
@@ -186,6 +200,10 @@ echo $tag; // <body class="a b c front node sidebar">Hello world</body>
 The following examples will all produce the same HTML.
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag->attr('class', ['front', ['node', ['sidebar']]]);
 $tag->content('Hello world');
@@ -194,6 +212,10 @@ echo $tag; // <body class="front node sidebar">Hello world</body>
 ```
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag->attr('class', 'front', 'node', 'sidebar');
 $tag->content('Hello world');
@@ -202,6 +224,10 @@ echo $tag; // <body class="front node sidebar">Hello world</body>
 ```
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag->attr('class', ['front', 'node', 'sidebar']);
 $tag->content('Hello world');
@@ -210,6 +236,10 @@ echo $tag; // <body class="front node sidebar">Hello world</body>
 ```
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag->attr('class', 'front node sidebar');
 $tag->content('Hello world');
@@ -220,6 +250,10 @@ echo $tag; // <body class="front node sidebar">Hello world</body>
 ### Tag object
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $tag = \drupol\htmltag\HtmlTag::tag('body');
 $tag->attr('class', 'front');
 $tag->content('Hello world');
@@ -230,6 +264,10 @@ echo $tag; // <body class="front">Hello world</body>
 ### Attributes object
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $attributes = \drupol\htmltag\HtmlTag::attributes();
 $attributes->append('class', 'a', 'b', 'c');
 $attributes->append('id', 'htmltag');
@@ -241,6 +279,10 @@ echo $attributes; //  class="a b c" id="htmltag"
 ### Attribute object
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 $attribute = \drupol\htmltag\HtmlTag::attribute('class', 'section');
 
 echo $attribute; // class="section"
@@ -253,6 +295,10 @@ Thanks to the factories provided in the library, it is possible to use different
 Ex: You want to have a special handling for the "class" attribute.
 
 ```php
+<?php 
+
+include 'vendor/autoload.php';
+
 class MyCustomAttributeClass extends \drupol\htmltag\Attribute\Attribute {
     /**
      * {@inheritdoc}
