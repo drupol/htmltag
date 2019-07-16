@@ -5,12 +5,13 @@ git:
 
 cache:
   directories:
-    - $HOME/.cache/composer
-    - $HOME/.composer/cache
+  - "$HOME/.cache/composer"
+  - "$HOME/.composer/cache"
 
 php:
 - 7.1
 - 7.2
+- 7.3
 
 install:
 - composer install
@@ -21,13 +22,3 @@ script:
 after_success:
 - phpenv config-rm xdebug.ini
 - composer scrutinizer
-- composer apigen
-
-deploy:
-  local-dir: build/docs
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: master
