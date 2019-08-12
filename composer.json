@@ -1,8 +1,13 @@
 {
     "name": "drupol/htmltag",
-    "description": "A fast and extensible helper library for generating HTML, create tags, their attributes and content.",
-    "keywords": ["html", "tags", "attributes", "html generation"],
     "type": "library",
+    "description": "A fast and extensible helper library for generating HTML, create tags, their attributes and content.",
+    "keywords": [
+        "html",
+        "tags",
+        "attributes",
+        "html generation"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -23,6 +28,9 @@
         "phptaskman/changelog": "^1.0",
         "scrutinizer/ocular": "^1"
     },
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "drupol\\htmltag\\": "./src/"
@@ -32,19 +40,18 @@
         "psr-4": {
             "drupol\\htmltag\\benchmarks\\": "./benchmarks/"
         },
-        "classmap": ["spec/src/"]
-    },
-    "config": {
-        "sort-packages": true
+        "classmap": [
+            "spec/src/"
+        ]
     },
     "scripts": {
         "apigen": "./vendor/bin/apigen generate src --destination build/docs",
-        "phpspec": "./vendor/bin/phpspec run",
+        "bench": "./vendor/bin/phpbench run --report=aggregate --store --precision=3",
         "grumphp": "./vendor/bin/grumphp run",
-        "phpcs": "./vendor/bin/phpcs --ignore=vendor .",
-        "phpcbf": "./vendor/bin/phpcbf --ignore=vendor .",
         "infection": "./vendor/bin/infection run -j 10",
-        "scrutinizer": "./vendor/bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml",
-        "bench": "./vendor/bin/phpbench run --report=aggregate --store --precision=3"
+        "phpcbf": "./vendor/bin/phpcbf --ignore=vendor .",
+        "phpcs": "./vendor/bin/phpcs --ignore=vendor .",
+        "phpspec": "./vendor/bin/phpspec run",
+        "scrutinizer": "./vendor/bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml"
     }
 }

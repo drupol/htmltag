@@ -32,10 +32,10 @@ abstract class AbstractBaseHtmlTagObject
         $flat = [];
 
         while (!empty($data)) {
-            $value = \array_shift($data);
+            $value = array_shift($data);
 
             if (\is_array($value)) {
-                $data = \array_merge($value, $data);
+                $data = array_merge($value, $data);
 
                 continue;
             }
@@ -73,7 +73,7 @@ abstract class AbstractBaseHtmlTagObject
 
                 break;
             case 'object':
-                if (\method_exists($data, '__toString')) {
+                if (method_exists($data, '__toString')) {
                     $return = $data->__toString();
                 }
 
@@ -105,9 +105,9 @@ abstract class AbstractBaseHtmlTagObject
      */
     protected function ensureStrings(array $values)
     {
-        return \array_values(
-            \array_filter(
-                \array_map(
+        return array_values(
+            array_filter(
+                array_map(
                     [$this, 'ensureString'],
                     $values
                 ),
