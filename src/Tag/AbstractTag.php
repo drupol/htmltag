@@ -104,7 +104,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     public function content(...$data)
     {
         if ([] !== $data) {
-            if (null === reset($data)) {
+            if (null === \reset($data)) {
                 $data = null;
             }
 
@@ -127,7 +127,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
 
         return null === $return ?
             $return :
-            htmlentities($return);
+            \htmlentities($return);
     }
 
     /**
@@ -154,8 +154,8 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     public function render()
     {
         return null === ($content = $this->renderContent()) ?
-            sprintf('<%s%s/>', $this->tag, $this->attributes->render()) :
-            sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
+            \sprintf('<%s%s/>', $this->tag, $this->attributes->render()) :
+            \sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
     }
 
     /**
@@ -163,7 +163,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      */
     public function serialize()
     {
-        return serialize([
+        return \serialize([
             'tag' => $this->tag,
             'attributes' => $this->attributes->getValuesAsArray(),
             'content' => $this->renderContent(),
@@ -175,7 +175,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      */
     public function unserialize($serialized)
     {
-        $unserialize = unserialize($serialized);
+        $unserialize = \unserialize($serialized);
 
         $this->tag = $unserialize['tag'];
         $this->attributes = $this->attributes->import($unserialize['attributes']);
@@ -189,8 +189,8 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      */
     protected function renderContent()
     {
-        return ($items = array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
+        return ($items = \array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
             null :
-            implode('', $items);
+            \implode('', $items);
     }
 }

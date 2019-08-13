@@ -33,7 +33,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function __construct($name, ...$values)
     {
-        if (1 === preg_match('/[\t\n\f \/>"\'=]+/', $name)) {
+        if (1 === \preg_match('/[\t\n\f \/>"\'=]+/', $name)) {
             // @todo: create exception class for this.
             throw new \InvalidArgumentException('Attribute name is not valid.');
         }
@@ -84,7 +84,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
 
         return !\in_array(
             false,
-            array_map(
+            \array_map(
                 static function ($substring_item) use ($values) {
                     return \in_array($substring_item, $values, true);
                 },
@@ -112,7 +112,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     {
         return null === $value ?
                 $value :
-                htmlspecialchars($value, \ENT_QUOTES | \ENT_SUBSTITUTE);
+                \htmlspecialchars($value, \ENT_QUOTES | \ENT_SUBSTITUTE);
     }
 
     /**
@@ -143,7 +143,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     {
         return ($values = $this->getValuesAsArray()) === [] ?
             null :
-            (string) $this->escape(implode(' ', array_filter($values, '\strlen')));
+            (string) $this->escape(\implode(' ', \array_filter($values, '\strlen')));
     }
 
     /**
@@ -200,7 +200,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     public function remove(...$value)
     {
         return $this->set(
-            array_diff(
+            \array_diff(
                 $this->ensureFlatArray($this->values),
                 $this->ensureFlatArray($value)
             )
@@ -237,7 +237,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function serialize()
     {
-        return serialize([
+        return \serialize([
             'name' => $this->name,
             'values' => $this->getValuesAsArray(),
         ]);
@@ -268,7 +268,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function unserialize($serialized)
     {
-        $unserialized = unserialize($serialized);
+        $unserialized = \unserialize($serialized);
 
         $this->name = $unserialized['name'];
         $this->values = $unserialized['values'];

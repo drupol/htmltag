@@ -33,9 +33,9 @@ class AttributeFactory implements AttributeFactoryInterface
             static::$registry[$name] :
             static::$registry['*'];
 
-        if (!\in_array(AttributeInterface::class, class_implements($attribute_classname), true)) {
+        if (!\in_array(AttributeInterface::class, \class_implements($attribute_classname), true)) {
             throw new \Exception(
-                sprintf(
+                \sprintf(
                     'The class (%s) must implement the interface %s.',
                     $attribute_classname,
                     AttributeInterface::class

@@ -115,7 +115,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
      */
     public function getStorage()
     {
-        return new \ArrayIterator(array_values($this->preprocess($this->storage)));
+        return new \ArrayIterator(\array_values($this->preprocess($this->storage)));
     }
 
     /**
@@ -247,7 +247,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
      */
     public function serialize()
     {
-        return serialize([
+        return \serialize([
             'storage' => $this->getValuesAsArray(),
         ]);
     }
@@ -267,15 +267,15 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
      */
     public function unserialize($serialized)
     {
-        $unserialize = unserialize($serialized);
+        $unserialize = \unserialize($serialized);
         $attributeFactory = $this->attributeFactory;
 
-        $this->storage = array_map(
+        $this->storage = \array_map(
             static function ($key, $values) use ($attributeFactory) {
                 return $attributeFactory::build($key, $values);
             },
-            array_keys($unserialize['storage']),
-            array_values($unserialize['storage'])
+            \array_keys($unserialize['storage']),
+            \array_values($unserialize['storage'])
         );
     }
 

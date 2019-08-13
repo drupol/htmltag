@@ -16,7 +16,7 @@ class AttributeSpec extends ObjectBehavior
         $this
             ->alter(
                 static function ($values) {
-                    return array_map('strtoupper', $values);
+                    return \array_map('strtoupper', $values);
                 }
             )
             ->render()
