@@ -21,7 +21,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * The tag content.
      *
-     * @var null|mixed[]
+     * @var mixed[]|null
      */
     private $content;
 
@@ -51,7 +51,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
 
     /**
      * @param string $name
-     * @param array $arguments
+     * @param array<string> $arguments
      *
      * @return \drupol\htmltag\Tag\TagInterface
      */
@@ -71,7 +71,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * {@inheritdoc}
      */
-    public function alter(callable ...$closures)
+    public function alter(callable ...$closures): TagInterface
     {
         foreach ($closures as $closure) {
             $this->content = $closure(
@@ -101,10 +101,10 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * {@inheritdoc}
      */
-    public function content(...$data)
+    public function content(...$data): ?string
     {
         if ([] !== $data) {
-            if (null === \reset($data)) {
+            if (null === reset($data)) {
                 $data = null;
             }
 
@@ -117,7 +117,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * {@inheritdoc}
      */
-    public function escape($value)
+    public function escape($value): ?string
     {
         $return = $this->ensureString($value);
 
@@ -127,13 +127,13 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
 
         return null === $return ?
             $return :
-            \htmlentities($return);
+            htmlentities($return);
     }
 
     /**
-     * @return array|\drupol\htmltag\Attribute\AttributeInterface[]
+     * @return array<int, string>
      */
-    public function getContentAsArray()
+    public function getContentAsArray(): array
     {
         return $this->preprocess(
             $this->ensureFlatArray((array) $this->content)
@@ -143,7 +143,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * {@inheritdoc}
      */
-    public function preprocess(array $values, array $context = [])
+    public function preprocess(array $values, array $context = []): array
     {
         return $values;
     }
@@ -151,11 +151,11 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render(): string
     {
         return null === ($content = $this->renderContent()) ?
-            \sprintf('<%s%s/>', $this->tag, $this->attributes->render()) :
-            \sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
+            sprintf('<%s%s/>', $this->tag, $this->attributes->render()) :
+            sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
     }
 
     /**
@@ -163,7 +163,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      */
     public function serialize()
     {
-        return \serialize([
+        return serialize([
             'tag' => $this->tag,
             'attributes' => $this->attributes->getValuesAsArray(),
             'content' => $this->renderContent(),
@@ -175,7 +175,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      */
     public function unserialize($serialized)
     {
-        $unserialize = \unserialize($serialized);
+        $unserialize = unserialize($serialized);
 
         $this->tag = $unserialize['tag'];
         $this->attributes = $this->attributes->import($unserialize['attributes']);
@@ -185,12 +185,12 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     /**
      * Render the tag content.
      *
-     * @return null|string
+     * @return string|null
      */
-    protected function renderContent()
+    protected function renderContent(): ?string
     {
-        return ($items = \array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
+        return ($items = array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
             null :
-            \implode('', $items);
+            implode('', $items);
     }
 }

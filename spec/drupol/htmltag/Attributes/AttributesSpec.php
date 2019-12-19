@@ -2,11 +2,14 @@
 
 namespace spec\drupol\htmltag\Attributes;
 
+use ArrayIterator;
 use drupol\htmltag\Attribute\AttributeFactory;
 use drupol\htmltag\Attribute\AttributeInterface;
 use drupol\htmltag\Attributes\Attributes;
 use drupol\htmltag\StringableInterface;
+use Iterator;
 use PhpSpec\ObjectBehavior;
+use stdClass;
 
 class AttributesSpec extends ObjectBehavior
 {
@@ -237,14 +240,14 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getIterator()
-            ->shouldReturnAnInstanceOf(\Iterator::class);
+            ->shouldReturnAnInstanceOf(Iterator::class);
     }
 
     public function it_can_return_array()
     {
         $this
             ->getStorage()
-            ->shouldYield(new \ArrayIterator([]));
+            ->shouldYield(new ArrayIterator([]));
 
         $this
             ->append('data-closable')
@@ -287,7 +290,7 @@ class AttributesSpec extends ObjectBehavior
     {
         $this
             ->getStorage()
-            ->shouldYield(new \ArrayIterator([]));
+            ->shouldYield(new ArrayIterator([]));
 
         $this
             ->append('data-closable')
@@ -296,7 +299,7 @@ class AttributesSpec extends ObjectBehavior
 
         $this
             ->getStorage()
-            ->shouldBeAnInstanceOf(\ArrayIterator::class);
+            ->shouldBeAnInstanceOf(ArrayIterator::class);
     }
 
     public function it_can_set()
@@ -340,8 +343,8 @@ class AttributesSpec extends ObjectBehavior
                 'bool_true_array' => [true, true, true],
                 'bool_false' => false,
                 'bool_false_array' => [false, false, false],
-                'object' => new \stdClass(),
-                'object_array' => [new \stdClass(), new \stdClass(), new \stdClass()],
+                'object' => new stdClass(),
+                'object_array' => [new stdClass(), new stdClass(), new stdClass()],
                 'object-printable' => new randomPrintableObject(),
                 'object-printable-array' => [new randomPrintableObject(), new randomPrintableObject()],
                 'null' => null,

@@ -7,16 +7,17 @@ use drupol\htmltag\EscapableInterface;
 use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
+use Serializable;
 
 /**
  * Interface TagInterface.
  */
 interface TagInterface extends
-    \Serializable,
     AlterableInterface,
     EscapableInterface,
     PreprocessableInterface,
     RenderableInterface,
+    Serializable,
     StringableInterface
 {
     /**
@@ -38,16 +39,16 @@ interface TagInterface extends
      * @param mixed ...$data
      *   The content.
      *
-     * @return null|string
+     * @return string|null
      *   The content
      */
-    public function content(...$data);
+    public function content(...$data): ?string;
 
     /**
      * Get the content.
      *
-     * @return array
+     * @return array<int, string>
      *   The content as an array
      */
-    public function getContentAsArray();
+    public function getContentAsArray(): array;
 }

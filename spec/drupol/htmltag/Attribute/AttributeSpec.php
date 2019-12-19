@@ -5,6 +5,7 @@ namespace spec\drupol\htmltag\Attribute;
 use drupol\htmltag\Attribute\Attribute;
 use drupol\htmltag\StringableInterface;
 use PhpSpec\ObjectBehavior;
+use stdClass;
 
 class AttributeSpec extends ObjectBehavior
 {
@@ -16,7 +17,7 @@ class AttributeSpec extends ObjectBehavior
         $this
             ->alter(
                 static function ($values) {
-                    return \array_map('strtoupper', $values);
+                    return array_map('strtoupper', $values);
                 }
             )
             ->render()
@@ -28,7 +29,7 @@ class AttributeSpec extends ObjectBehavior
                     $values[] = 'foo';
                     $values[] = '0';
                     $values[] = [
-                        new \stdClass(),
+                        new stdClass(),
                     ];
                     $values[] = new randomPrintableObject('<a href="#htmltag">htmltag</a>'); // Invalid stuff injected
 

@@ -10,13 +10,13 @@ interface PreprocessableInterface
     /**
      * Preprocess the values of an object.
      *
-     * @param array $values
+     * @param array<mixed> $values
      *   The values to preprocess.
-     * @param array $context
+     * @param array<mixed> $context
      *   The context.
      *
-     * @return array
+     * @return array<int, mixed>
      *   The values.
      */
-    public function preprocess(array $values, array $context = []);
+    public function preprocess(array $values, array $context = []): array;
 }

@@ -2,22 +2,26 @@
 
 namespace drupol\htmltag\Attribute;
 
+use ArrayAccess;
 use drupol\htmltag\AlterableInterface;
 use drupol\htmltag\EscapableInterface;
 use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
+use Serializable;
 
 /**
  * Interface AttributeInterface.
+ *
+ * @template-extends ArrayAccess<int, mixed>
  */
 interface AttributeInterface extends
-    \ArrayAccess,
-    \Serializable,
     AlterableInterface,
+    ArrayAccess,
     EscapableInterface,
     PreprocessableInterface,
     RenderableInterface,
+    Serializable,
     StringableInterface
 {
     /**
@@ -25,18 +29,18 @@ interface AttributeInterface extends
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      */
-    public function alter(callable ...$closures);
+    public function alter(callable ...$closures): AttributeInterface;
 
     /**
      * Append a value to the attribute.
      *
-     * @param null|mixed[]|string ...$value
+     * @param mixed[]|string|null ...$value
      *   The value to append.
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function append(...$value);
+    public function append(...$value): AttributeInterface;
 
     /**
      * Check if the attribute contains a string or a substring.
@@ -47,7 +51,7 @@ interface AttributeInterface extends
      * @return bool
      *   True or False
      */
-    public function contains(...$substring);
+    public function contains(...$substring): bool;
 
     /**
      * Delete the current attribute.
@@ -55,7 +59,7 @@ interface AttributeInterface extends
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function delete();
+    public function delete(): AttributeInterface;
 
     /**
      * Get the attribute name.
@@ -63,23 +67,23 @@ interface AttributeInterface extends
      * @return string
      *   The attribute name
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Get the attribute value as an array.
      *
-     * @return array
+     * @return array<int, string>
      *   The attribute value as an array
      */
-    public function getValuesAsArray();
+    public function getValuesAsArray(): array;
 
     /**
      * Get the attribute value as a string.
      *
-     * @return null|string
+     * @return string|null
      *   The attribute value as a string
      */
-    public function getValuesAsString();
+    public function getValuesAsString(): ?string;
 
     /**
      * Check if the attribute is a loner attribute.
@@ -98,7 +102,7 @@ interface AttributeInterface extends
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function remove(...$value);
+    public function remove(...$value): AttributeInterface;
 
     /**
      * Replace a value of the attribute.
@@ -111,18 +115,18 @@ interface AttributeInterface extends
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function replace($original, ...$replacement);
+    public function replace($original, ...$replacement): AttributeInterface;
 
     /**
      * Set the value.
      *
-     * @param null|array|string ...$value
+     * @param array|string|null ...$value
      *   The value.
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function set(...$value);
+    public function set(...$value): AttributeInterface;
 
     /**
      * Set the attribute as a loner attribute.
@@ -133,5 +137,5 @@ interface AttributeInterface extends
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function setBoolean($boolean = true);
+    public function setBoolean($boolean = true): AttributeInterface;
 }

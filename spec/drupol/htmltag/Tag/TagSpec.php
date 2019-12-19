@@ -6,6 +6,7 @@ use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\StringableInterface;
 use drupol\htmltag\Tag\Tag;
 use PhpSpec\ObjectBehavior;
+use stdClass;
 
 class TagSpec extends ObjectBehavior
 {
@@ -18,7 +19,7 @@ class TagSpec extends ObjectBehavior
 
         $this
             ->alter(static function (array $values) {
-                return \array_map('strtoupper', $values);
+                return array_map('strtoupper', $values);
             })
             ->render()
             ->shouldReturn('<p/>');
@@ -27,7 +28,7 @@ class TagSpec extends ObjectBehavior
 
         $this
             ->alter(static function (array $values) {
-                return \array_map('strtoupper', $values);
+                return array_map('strtoupper', $values);
             })
             ->render()
             ->shouldReturn('<p>HELLO CONTENTGOODBYE CONTENT</p>');
@@ -35,7 +36,7 @@ class TagSpec extends ObjectBehavior
         $this
             ->alter(static function (array $values) {
                 $values[] = '<a href="#htmltag">htmltag</a>';
-                $values[] = new \stdClass();
+                $values[] = new stdClass();
                 $values[] = [
                     'boo',
                     'foo',

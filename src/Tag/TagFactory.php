@@ -4,6 +4,10 @@ namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\Attributes\AttributesFactory;
 use drupol\htmltag\Attributes\AttributesInterface;
+use Exception;
+use ReflectionClass;
+
+use function in_array;
 
 /**
  * Class TagFactory.
@@ -13,7 +17,7 @@ class TagFactory implements TagFactoryInterface
     /**
      * The classes registry.
      *
-     * @var array
+     * @var array<string, string>
      */
     public static $registry = [
         'attributes_factory' => AttributesFactory::class,
@@ -28,7 +32,7 @@ class TagFactory implements TagFactoryInterface
         $name,
         array $attributes = [],
         $content = null
-    ) {
+    ): TagInterface {
         return (new static())->getInstance($name, $attributes, $content);
     }
 
@@ -39,19 +43,17 @@ class TagFactory implements TagFactoryInterface
         $name,
         array $attributes = [],
         $content = null
-    ) {
+    ): TagInterface {
         $attributes_factory_classname = static::$registry['attributes_factory'];
 
         /** @var AttributesInterface $attributes */
         $attributes = $attributes_factory_classname::build($attributes);
 
-        $tag_classname = isset(static::$registry[$name]) ?
-            static::$registry[$name] :
-            static::$registry['*'];
+        $tag_classname = static::$registry[$name] ?? static::$registry['*'];
 
-        if (!\in_array(TagInterface::class, \class_implements($tag_classname), true)) {
-            throw new \Exception(
-                \sprintf(
+        if (!in_array(TagInterface::class, class_implements($tag_classname), true)) {
+            throw new Exception(
+                sprintf(
                     'The class (%s) must implement the interface %s.',
                     $tag_classname,
                     TagInterface::class
@@ -60,7 +62,7 @@ class TagFactory implements TagFactoryInterface
         }
 
         /** @var \drupol\htmltag\Tag\TagInterface $tag */
-        $tag = (new \ReflectionClass($tag_classname))
+        $tag = (new ReflectionClass($tag_classname))
             ->newInstanceArgs([
                 $attributes,
                 $name,

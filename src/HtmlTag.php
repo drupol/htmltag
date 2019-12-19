@@ -3,8 +3,11 @@
 namespace drupol\htmltag;
 
 use drupol\htmltag\Attribute\AttributeFactory;
+use drupol\htmltag\Attribute\AttributeInterface;
 use drupol\htmltag\Attributes\AttributesFactory;
+use drupol\htmltag\Attributes\AttributesInterface;
 use drupol\htmltag\Tag\TagFactory;
+use drupol\htmltag\Tag\TagInterface;
 
 /**
  * Class HtmlTag.
@@ -14,7 +17,7 @@ final class HtmlTag implements HtmlTagInterface
     /**
      * {@inheritdoc}
      */
-    public static function attribute($name, $value)
+    public static function attribute($name, $value): AttributeInterface
     {
         return AttributeFactory::build($name, $value);
     }
@@ -22,7 +25,7 @@ final class HtmlTag implements HtmlTagInterface
     /**
      * {@inheritdoc}
      */
-    public static function attributes(array $attributes = [])
+    public static function attributes(array $attributes = []): AttributesInterface
     {
         return AttributesFactory::build($attributes);
     }
@@ -30,7 +33,7 @@ final class HtmlTag implements HtmlTagInterface
     /**
      * {@inheritdoc}
      */
-    public static function tag($name, array $attributes = [], $content = null)
+    public static function tag($name, array $attributes = [], $content = null): TagInterface
     {
         return TagFactory::build($name, $attributes, $content);
     }

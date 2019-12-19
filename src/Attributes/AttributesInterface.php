@@ -2,20 +2,28 @@
 
 namespace drupol\htmltag\Attributes;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
 use drupol\htmltag\PreprocessableInterface;
 use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
+use IteratorAggregate;
+use Serializable;
+use Traversable;
 
 /**
  * Interface AttributesInterface.
+ *
+ * @template-extends IteratorAggregate<mixed>
  */
 interface AttributesInterface extends
-    \ArrayAccess,
-    \Countable,
-    \IteratorAggregate,
-    \Serializable,
+    ArrayAccess,
+    Countable,
+    IteratorAggregate,
     PreprocessableInterface,
     RenderableInterface,
+    Serializable,
     StringableInterface
 {
     /**
@@ -34,7 +42,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function append($key, ...$values);
+    public function append($key, ...$values): AttributesInterface;
 
     /**
      * Check if attribute contains a value.
@@ -47,7 +55,7 @@ interface AttributesInterface extends
      * @return bool
      *   Whereas an attribute contains a value
      */
-    public function contains($key, ...$values);
+    public function contains($key, ...$values): bool;
 
     /**
      * Delete an attribute.
@@ -58,7 +66,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function delete(...$keys);
+    public function delete(...$keys): AttributesInterface;
 
     /**
      * Check if an attribute exists and if a value if provided check it as well.
@@ -71,45 +79,45 @@ interface AttributesInterface extends
      * @return bool
      *   True if the attribute exists, false otherwise
      */
-    public function exists($key, ...$values);
+    public function exists($key, ...$values): bool;
 
     /**
      * Get storage.
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator<mixed>
      *   The storage array
      */
-    public function getStorage();
+    public function getStorage(): ArrayIterator;
 
     /**
      * Get the values as an array.
      *
-     * @return array
+     * @return array<string, mixed>
      *   The attributes values keyed by the attribute name
      */
-    public function getValuesAsArray();
+    public function getValuesAsArray(): array;
 
     /**
      * Import attributes.
      *
-     * @param array|\Traversable $data
+     * @param array|Traversable $data
      *   The data to import
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function import($data);
+    public function import($data): AttributesInterface;
 
     /**
      * Merge attributes.
      *
-     * @param array ...$dataset
+     * @param array<mixed> ...$dataset
      *   The data to merge.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function merge(array ...$dataset);
+    public function merge(array ...$dataset): AttributesInterface;
 
     /**
      * Remove a value from a specific attribute.
@@ -122,7 +130,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function remove($key, ...$values);
+    public function remove($key, ...$values): AttributesInterface;
 
     /**
      * Replace a value with another.
@@ -131,26 +139,26 @@ interface AttributesInterface extends
      *   The attributes's name
      * @param string $value
      *   The attribute's value
-     * @param array|string ...$replacements
+     * @param string ...$replacements
      *   The replacement values.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function replace($key, $value, ...$replacements);
+    public function replace(string $key, string $value, ...$replacements): AttributesInterface;
 
     /**
      * Set an attribute.
      *
      * @param string $key
      *   The attribute name
-     * @param null|string ...$values
+     * @param string|null ...$values
      *   The attribute values.
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function set($key, ...$values);
+    public function set($key, ...$values): AttributesInterface;
 
     /**
      * Return the attributes without a specific attribute.
@@ -161,5 +169,5 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function without(...$keys);
+    public function without(...$keys): AttributesInterface;
 }

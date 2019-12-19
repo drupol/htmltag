@@ -2,6 +2,9 @@
 
 namespace drupol\htmltag;
 
+use function gettype;
+use function is_array;
+
 /**
  * Class AbstractBaseHtmlTagObject.
  *
@@ -27,15 +30,15 @@ abstract class AbstractBaseHtmlTagObject
      * @return mixed[]
      *   A simple array
      */
-    protected function ensureFlatArray(array $data)
+    protected function ensureFlatArray(array $data): array
     {
         $flat = [];
 
         while (!empty($data)) {
-            $value = \array_shift($data);
+            $value = array_shift($data);
 
-            if (\is_array($value)) {
-                $data = \array_merge($value, $data);
+            if (is_array($value)) {
+                $data = array_merge($value, $data);
 
                 continue;
             }
@@ -55,14 +58,14 @@ abstract class AbstractBaseHtmlTagObject
      * @param mixed $data
      *   The input value
      *
-     * @return null|string
+     * @return string|null
      *   The value converted as a string or null
      */
-    protected function ensureString($data)
+    protected function ensureString($data): ?string
     {
         $return = null;
 
-        switch (\gettype($data)) {
+        switch (gettype($data)) {
             case 'string':
                 $return = $data;
 
@@ -73,8 +76,8 @@ abstract class AbstractBaseHtmlTagObject
 
                 break;
             case 'object':
-                if (\method_exists($data, '__toString')) {
-                    $return = $data->__toString();
+                if (method_exists($data, '__toString')) {
+                    $return = (string) $data;
                 }
 
                 break;
@@ -103,11 +106,11 @@ abstract class AbstractBaseHtmlTagObject
      * @return null[]|string[]
      *   The output values, should be an array of strings
      */
-    protected function ensureStrings(array $values)
+    protected function ensureStrings(array $values): array
     {
-        return \array_values(
-            \array_filter(
-                \array_map(
+        return array_values(
+            array_filter(
+                array_map(
                     [$this, 'ensureString'],
                     $values
                 ),

@@ -2,7 +2,15 @@
 
 namespace drupol\htmltag\Attribute;
 
+use BadMethodCallException;
 use drupol\htmltag\AbstractBaseHtmlTagObject;
+use InvalidArgumentException;
+
+use function count;
+use function in_array;
+
+use const ENT_QUOTES;
+use const ENT_SUBSTITUTE;
 
 /**
  * Class Attribute.
@@ -19,7 +27,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * Store the attribute value.
      *
-     * @var array
+     * @var array<mixed>
      */
     private $values;
 
@@ -31,11 +39,11 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      * @param mixed[]|string|string[] ...$values
      *   The attribute values.
      */
-    public function __construct($name, ...$values)
+    public function __construct(string $name, ...$values)
     {
-        if (1 === \preg_match('/[\t\n\f \/>"\'=]+/', $name)) {
+        if (1 === preg_match('/[\t\n\f \/>"\'=]+/', $name)) {
             // @todo: create exception class for this.
-            throw new \InvalidArgumentException('Attribute name is not valid.');
+            throw new InvalidArgumentException('Attribute name is not valid.');
         }
 
         $this->name = $name;
@@ -53,7 +61,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function alter(callable ...$closures)
+    public function alter(callable ...$closures): AttributeInterface
     {
         foreach ($closures as $closure) {
             $this->values = $closure(
@@ -68,7 +76,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function append(...$value)
+    public function append(...$value): AttributeInterface
     {
         $this->values[] = $value;
 
@@ -78,15 +86,15 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function contains(...$substring)
+    public function contains(...$substring): bool
     {
         $values = $this->ensureFlatArray($this->values);
 
-        return !\in_array(
+        return !in_array(
             false,
-            \array_map(
+            array_map(
                 static function ($substring_item) use ($values) {
-                    return \in_array($substring_item, $values, true);
+                    return in_array($substring_item, $values, true);
                 },
                 $this->ensureFlatArray($substring)
             ),
@@ -97,7 +105,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function delete()
+    public function delete(): AttributeInterface
     {
         $this->name = '';
         $this->values = [];
@@ -108,17 +116,17 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function escape($value)
+    public function escape($value): string
     {
         return null === $value ?
                 $value :
-                \htmlspecialchars($value, \ENT_QUOTES | \ENT_SUBSTITUTE);
+                htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -126,7 +134,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function getValuesAsArray()
+    public function getValuesAsArray(): array
     {
         return $this->ensureStrings(
             $this->preprocess(
@@ -139,39 +147,46 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function getValuesAsString()
+    public function getValuesAsString(): ?string
     {
         return ($values = $this->getValuesAsArray()) === [] ?
             null :
-            (string) $this->escape(\implode(' ', \array_filter($values, '\strlen')));
+            (string) $this->escape(implode(' ', array_filter($values, '\strlen')));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isBoolean()
+    public function isBoolean(): bool
     {
         return $this->getValuesAsArray() === [];
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     *
+     * @return bool
      */
     public function offsetExists($offset)
     {
-        return $this->contains($offset);
+        return $this->contains((string) $offset);
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     *
+     * @return void
      */
     public function offsetGet($offset)
     {
-        throw new \BadMethodCallException('Unsupported method.');
+        throw new BadMethodCallException('Unsupported method.');
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     * @param mixed $value
+     *
+     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -179,17 +194,19 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     *
+     * @return void
      */
     public function offsetUnset($offset)
     {
-        $this->remove($offset);
+        $this->remove((string) $offset);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function preprocess(array $values, array $context = [])
+    public function preprocess(array $values, array $context = []): array
     {
         return $values;
     }
@@ -197,10 +214,10 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function remove(...$value)
+    public function remove(...$value): AttributeInterface
     {
         return $this->set(
-            \array_diff(
+            array_diff(
                 $this->ensureFlatArray($this->values),
                 $this->ensureFlatArray($value)
             )
@@ -210,7 +227,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render(): string
     {
         return null === ($values = $this->getValuesAsString()) ?
             $this->name :
@@ -220,12 +237,12 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function replace($original, ...$replacement)
+    public function replace($original, ...$replacement): AttributeInterface
     {
-        $count_start = \count($this->ensureFlatArray($this->values));
+        $count_start = count($this->ensureFlatArray($this->values));
         $this->remove($original);
 
-        if (\count($this->ensureFlatArray($this->values)) !== $count_start) {
+        if (count($this->ensureFlatArray($this->values)) !== $count_start) {
             $this->append($replacement);
         }
 
@@ -237,7 +254,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function serialize()
     {
-        return \serialize([
+        return serialize([
             'name' => $this->name,
             'values' => $this->getValuesAsArray(),
         ]);
@@ -246,7 +263,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function set(...$value)
+    public function set(...$value): AttributeInterface
     {
         $this->values = $value;
 
@@ -256,7 +273,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
     /**
      * {@inheritdoc}
      */
-    public function setBoolean($boolean = true)
+    public function setBoolean($boolean = true): AttributeInterface
     {
         return true === $boolean ?
             $this->set() :
@@ -268,7 +285,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function unserialize($serialized)
     {
-        $unserialized = \unserialize($serialized);
+        $unserialized = unserialize($serialized);
 
         $this->name = $unserialized['name'];
         $this->values = $unserialized['values'];

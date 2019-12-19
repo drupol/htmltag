@@ -13,7 +13,7 @@ final class HtmlBuilder implements StringableInterface
     /**
      * The tag scope.
      *
-     * @var null|\drupol\htmltag\Tag\TagInterface
+     * @var \drupol\htmltag\Tag\TagInterface|null
      */
     private $scope;
 

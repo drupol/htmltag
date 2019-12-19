@@ -10,8 +10,8 @@ final class Comment extends AbstractTag
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render(): string
     {
-        return \sprintf('<!--%s-->', $this->renderContent());
+        return sprintf('<!--%s-->', $this->renderContent());
     }
 }

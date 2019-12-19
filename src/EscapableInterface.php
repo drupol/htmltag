@@ -10,10 +10,10 @@ interface EscapableInterface
     /**
      * Escape a value.
      *
-     * @param null|mixed|string|StringableInterface $value
+     * @param mixed|string|StringableInterface|null $value
      *   The value to escape.
      *
-     * @return null|string|StringableInterface
+     * @return string|StringableInterface|null
      *   The value.
      */
     public function escape($value);

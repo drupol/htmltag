@@ -12,24 +12,24 @@ interface AttributeFactoryInterface
      *
      * @param string $name
      *   The attribute name
-     * @param null|mixed[]|string $value
+     * @param mixed[]|string|null $value
      *   The attribute value
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public static function build($name, $value = null);
+    public static function build($name, $value = null): AttributeInterface;
 
     /**
      * Create a new attribute.
      *
      * @param string $name
      *   The attribute name
-     * @param null|mixed[]|string $value
+     * @param mixed[]|string|null $value
      *   The attribute value
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function getInstance($name, $value = null);
+    public function getInstance($name, $value = null): AttributeInterface;
 }

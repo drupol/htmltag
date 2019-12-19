@@ -2,6 +2,10 @@
 
 namespace drupol\htmltag;
 
+use drupol\htmltag\Attribute\AttributeInterface;
+use drupol\htmltag\Attributes\AttributesInterface;
+use drupol\htmltag\Tag\TagInterface;
+
 /**
  * Interface HtmlTagInterface.
  */
@@ -12,31 +16,31 @@ interface HtmlTagInterface
      *
      * @param string $name
      *   The attribute name
-     * @param mixed[]|string|string[] $value
+     * @param array<mixed>|string $value
      *   The attribute value
      *
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public static function attribute($name, $value);
+    public static function attribute($name, $value): AttributeInterface;
 
     /**
      * Create a new attributes.
      *
-     * @param array $attributes
+     * @param array<mixed> $attributes
      *   The attributes
      *
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public static function attributes(array $attributes = []);
+    public static function attributes(array $attributes = []): AttributesInterface;
 
     /**
      * Create a new tag.
      *
      * @param string $name
      *   The tag name
-     * @param array $attributes
+     * @param array<mixed> $attributes
      *   The attributes
      * @param mixed $content
      *   The content
@@ -44,5 +48,5 @@ interface HtmlTagInterface
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag
      */
-    public static function tag($name, array $attributes = [], $content = null);
+    public static function tag($name, array $attributes = [], $content = null): TagInterface;
 }
