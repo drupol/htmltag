@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\drupol\htmltag\Tag;
 
 use drupol\htmltag\Tag\TagFactory;

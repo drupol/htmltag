@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace drupol\htmltag\Tag;
 
 use drupol\htmltag\AbstractBaseHtmlTagObject;
@@ -184,12 +186,10 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
 
     /**
      * Render the tag content.
-     *
-     * @return string|null
      */
     protected function renderContent(): ?string
     {
-        return ($items = array_map([$this, 'escape'], $this->getContentAsArray())) === [] ?
+        return [] === ($items = array_map([$this, 'escape'], $this->getContentAsArray())) ?
             null :
             implode('', $items);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace drupol\htmltag\Attribute;
 
 use BadMethodCallException;
@@ -149,7 +151,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function getValuesAsString(): ?string
     {
-        return ($values = $this->getValuesAsArray()) === [] ?
+        return [] === ($values = $this->getValuesAsArray()) ?
             null :
             (string) $this->escape(implode(' ', array_filter($values, '\strlen')));
     }
@@ -159,7 +161,7 @@ abstract class AbstractAttribute extends AbstractBaseHtmlTagObject implements At
      */
     public function isBoolean(): bool
     {
-        return $this->getValuesAsArray() === [];
+        return [] === $this->getValuesAsArray();
     }
 
     /**
