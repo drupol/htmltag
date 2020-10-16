@@ -353,17 +353,17 @@ Feel free to check them out in the `spec` directory. Run `composer phpspec` to t
 
 Feel free to contribute to this library by sending Github pull requests. I'm quite reactive :-)
 
-[packagist collection]: https://packagist.org/packages/htmltag/collection
-[latest stable version]: https://img.shields.io/packagist/v/htmltag/collection.svg?style=flat-square
-[github stars]: https://img.shields.io/github/stars/htmltag/collection.svg?style=flat-square
-[total downloads]: https://img.shields.io/packagist/dt/htmltag/collection.svg?style=flat-square
-[github workflow status]: https://img.shields.io/github/workflow/status/htmltag/collection/Continuous%20Integration?style=flat-square
-[code quality]: https://img.shields.io/scrutinizer/quality/g/htmltag/collection/master.svg?style=flat-square
-[scrutinizer code quality]: https://scrutinizer-ci.com/g/htmltag/collection/?branch=master
-[type coverage]: https://shepherd.dev/github/htmltag/collection/coverage.svg
-[sheperd type coverage]: https://shepherd.dev/github/htmltag/collection
-[code coverage]: https://img.shields.io/scrutinizer/coverage/g/htmltag/collection/master.svg?style=flat-square
-[license]: https://img.shields.io/packagist/l/htmltag/collection.svg?style=flat-square
+[packagist collection]: https://packagist.org/packages/drupol/htmltag
+[latest stable version]: https://img.shields.io/packagist/v/drupol/htmltag.svg?style=flat-square
+[github stars]: https://img.shields.io/github/stars/drupol/htmltag.svg?style=flat-square
+[total downloads]: https://img.shields.io/packagist/dt/drupol/htmltag.svg?style=flat-square
+[github workflow status]: https://img.shields.io/github/workflow/status/drupol/htmltag/Continuous%20Integration?style=flat-square
+[code quality]: https://img.shields.io/scrutinizer/quality/g/drupol/htmltag/master.svg?style=flat-square
+[scrutinizer code quality]: https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master
+[type coverage]: https://shepherd.dev/github/drupol/htmltag/coverage.svg
+[sheperd type coverage]: https://shepherd.dev/github/drupol/htmltag
+[code coverage]: https://img.shields.io/scrutinizer/coverage/g/drupol/htmltag/master.svg?style=flat-square
+[license]: https://img.shields.io/packagist/l/drupol/htmltag.svg?style=flat-square
 [donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
 [donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
 [github sponsor]: https://github.com/sponsors/drupol
