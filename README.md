@@ -19,8 +19,7 @@ The focus is on security, speed and usability.
 
 ## Requirements
 
-* PHP 5.6 for regular usage.
-* PHP 7 for development and running tests.
+* PHP >= 7.1.3
 
 ## Installation
 
