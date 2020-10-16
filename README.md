@@ -368,3 +368,6 @@ Feel free to contribute to this library by sending Github pull requests. I'm qui
 [license]: https://img.shields.io/packagist/l/htmltag/collection.svg?style=flat-square
 [donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
 [donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
+[github sponsor]: https://github.com/sponsors/drupol
+[paypal sponsor]: https://www.paypal.me/drupol
+[collection actions]: https://github.com/drupol/htmltag/actions
