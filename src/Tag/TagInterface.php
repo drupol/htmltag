@@ -11,9 +11,6 @@ use drupol\htmltag\RenderableInterface;
 use drupol\htmltag\StringableInterface;
 use Serializable;
 
-/**
- * Interface TagInterface.
- */
 interface TagInterface extends
     AlterableInterface,
     EscapableInterface,
@@ -33,7 +30,7 @@ interface TagInterface extends
      * @return \drupol\htmltag\Attribute\AttributeInterface|string
      *   The attributes as string or a specific Attribute object
      */
-    public function attr($name = null, ...$value);
+    public function attr(?string $name = null, ...$value);
 
     /**
      * Set or get the content.

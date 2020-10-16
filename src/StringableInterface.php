@@ -15,5 +15,5 @@ interface StringableInterface
      * @return string
      *   The string
      */
-    public function __toString();
+    public function __toString(): string;
 }

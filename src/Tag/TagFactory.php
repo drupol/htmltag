@@ -11,9 +11,6 @@ use ReflectionClass;
 
 use function in_array;
 
-/**
- * Class TagFactory.
- */
 class TagFactory implements TagFactoryInterface
 {
     /**
@@ -27,22 +24,16 @@ class TagFactory implements TagFactoryInterface
         '*' => Tag::class,
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public static function build(
-        $name,
+        string $name,
         array $attributes = [],
         $content = null
     ): TagInterface {
         return (new static())->getInstance($name, $attributes, $content);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getInstance(
-        $name,
+        string $name,
         array $attributes = [],
         $content = null
     ): TagInterface {

@@ -8,9 +8,6 @@ use drupol\htmltag\AbstractBaseHtmlTagObject;
 use drupol\htmltag\Attributes\AttributesInterface;
 use drupol\htmltag\StringableInterface;
 
-/**
- * Class AbstractTag.
- */
 abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInterface
 {
     /**
@@ -44,7 +41,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
      * @param mixed $content
      *   The content
      */
-    public function __construct(AttributesInterface $attributes, $name, $content = null)
+    public function __construct(AttributesInterface $attributes, ?string $name = null, $content = null)
     {
         $this->tag = $name;
         $this->attributes = $attributes;
@@ -52,27 +49,20 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
     }
 
     /**
-     * @param string $name
      * @param array<string> $arguments
      *
      * @return \drupol\htmltag\Tag\TagInterface
      */
-    public static function __callStatic($name, array $arguments = [])
+    public static function __callStatic(string $name, array $arguments = [])
     {
         return new static($arguments[0], $name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function alter(callable ...$closures): TagInterface
     {
         foreach ($closures as $closure) {
@@ -84,10 +74,7 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attr($name = null, ...$value)
+    public function attr(?string $name = null, ...$value)
     {
         if (null === $name) {
             return $this->attributes->render();
@@ -100,9 +87,6 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         return $this->attributes[$name]->set($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function content(...$data): ?string
     {
         if ([] !== $data) {
@@ -116,9 +100,6 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         return $this->renderContent();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function escape($value): ?string
     {
         $return = $this->ensureString($value);
@@ -142,17 +123,11 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preprocess(array $values, array $context = []): array
     {
         return $values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(): string
     {
         return null === ($content = $this->renderContent()) ?
@@ -160,9 +135,6 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
             sprintf('<%s%s>%s</%s>', $this->tag, $this->attributes->render(), $content, $this->tag);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         return serialize([
@@ -172,9 +144,6 @@ abstract class AbstractTag extends AbstractBaseHtmlTagObject implements TagInter
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unserialize($serialized)
     {
         $unserialize = unserialize($serialized);

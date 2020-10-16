@@ -24,7 +24,7 @@ interface HtmlTagInterface
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public static function attribute($name, $value): AttributeInterface;
+    public static function attribute(string $name, $value): AttributeInterface;
 
     /**
      * Create a new attributes.
@@ -50,5 +50,5 @@ interface HtmlTagInterface
      * @return \drupol\htmltag\Tag\TagInterface
      *   The tag
      */
-    public static function tag($name, array $attributes = [], $content = null): TagInterface;
+    public static function tag(string $name, array $attributes = [], $content = null): TagInterface;
 }

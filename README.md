@@ -299,9 +299,7 @@ Ex: You want to have a special handling for the "class" attribute.
 include 'vendor/autoload.php';
 
 class MyCustomAttributeClass extends \drupol\htmltag\Attribute\Attribute {
-    /**
-     * {@inheritdoc}
-     */
+
     protected function preprocess(array $values, array $context = []) {
         // Remove duplicated values.
         $values = array_unique($values);

@@ -9,9 +9,6 @@ use ReflectionClass;
 
 use function in_array;
 
-/**
- * Class AttributeFactory.
- */
 class AttributeFactory implements AttributeFactoryInterface
 {
     /**
@@ -23,18 +20,12 @@ class AttributeFactory implements AttributeFactoryInterface
         '*' => Attribute::class,
     ];
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function build($name, $value = null): AttributeInterface
+    public static function build(string $name, $value = null): AttributeInterface
     {
         return (new static())->getInstance($name, $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getInstance($name, $value = null): AttributeInterface
+    public function getInstance(string $name, $value = null): AttributeInterface
     {
         $attribute_classname = static::$registry[$name] ?? static::$registry['*'];
 

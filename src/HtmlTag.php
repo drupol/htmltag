@@ -16,26 +16,17 @@ use drupol\htmltag\Tag\TagInterface;
  */
 final class HtmlTag implements HtmlTagInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function attribute($name, $value): AttributeInterface
+    public static function attribute(string $name, $value): AttributeInterface
     {
         return AttributeFactory::build($name, $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function attributes(array $attributes = []): AttributesInterface
     {
         return AttributesFactory::build($attributes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function tag($name, array $attributes = [], $content = null): TagInterface
+    public static function tag(string $name, array $attributes = [], $content = null): TagInterface
     {
         return TagFactory::build($name, $attributes, $content);
     }

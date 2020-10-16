@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace drupol\htmltag\Attribute;
 
-/**
- * Interface AttributeFactoryInterface.
- */
 interface AttributeFactoryInterface
 {
     /**
@@ -20,7 +17,7 @@ interface AttributeFactoryInterface
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public static function build($name, $value = null): AttributeInterface;
+    public static function build(string $name, $value = null): AttributeInterface;
 
     /**
      * Create a new attribute.
@@ -33,5 +30,5 @@ interface AttributeFactoryInterface
      * @return \drupol\htmltag\Attribute\AttributeInterface
      *   The attribute
      */
-    public function getInstance($name, $value = null): AttributeInterface;
+    public function getInstance(string $name, $value = null): AttributeInterface;
 }

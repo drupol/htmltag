@@ -448,7 +448,7 @@ class AttributesSpec extends ObjectBehavior
 
 class randomPrintableObject implements StringableInterface
 {
-    public function __toString()
+    public function __toString(): string
     {
         return 'randomPrintableObject';
     }

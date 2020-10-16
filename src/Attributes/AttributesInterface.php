@@ -15,8 +15,6 @@ use Serializable;
 use Traversable;
 
 /**
- * Interface AttributesInterface.
- *
  * @template-extends IteratorAggregate<mixed>
  */
 interface AttributesInterface extends
@@ -28,11 +26,6 @@ interface AttributesInterface extends
     Serializable,
     StringableInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString();
-
     /**
      * Append a value into an attribute.
      *
@@ -57,7 +50,7 @@ interface AttributesInterface extends
      * @return bool
      *   Whereas an attribute contains a value
      */
-    public function contains($key, ...$values): bool;
+    public function contains(string $key, ...$values): bool;
 
     /**
      * Delete an attribute.
@@ -68,7 +61,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function delete(...$keys): AttributesInterface;
+    public function delete(string ...$keys): AttributesInterface;
 
     /**
      * Check if an attribute exists and if a value if provided check it as well.
@@ -81,7 +74,7 @@ interface AttributesInterface extends
      * @return bool
      *   True if the attribute exists, false otherwise
      */
-    public function exists($key, ...$values): bool;
+    public function exists(string $key, ...$values): bool;
 
     /**
      * Get storage.
@@ -132,7 +125,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function remove($key, ...$values): AttributesInterface;
+    public function remove(string $key, ...$values): AttributesInterface;
 
     /**
      * Replace a value with another.
@@ -147,7 +140,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function replace(string $key, string $value, ...$replacements): AttributesInterface;
+    public function replace(string $key, string $value, string ...$replacements): AttributesInterface;
 
     /**
      * Set an attribute.
@@ -160,7 +153,7 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function set($key, ...$values): AttributesInterface;
+    public function set(string $key, ...$values): AttributesInterface;
 
     /**
      * Return the attributes without a specific attribute.
@@ -171,5 +164,5 @@ interface AttributesInterface extends
      * @return \drupol\htmltag\Attributes\AttributesInterface
      *   The attributes
      */
-    public function without(...$keys): AttributesInterface;
+    public function without(string ...$keys): AttributesInterface;
 }

@@ -26,9 +26,6 @@ final class HtmlBuilder implements StringableInterface
      */
     private $storage;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __call($name, array $arguments = [])
     {
         if ('c' === $name) {
@@ -52,10 +49,7 @@ final class HtmlBuilder implements StringableInterface
         return $this->update($tag, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $output = '';
 

@@ -13,8 +13,6 @@ use drupol\htmltag\StringableInterface;
 use Serializable;
 
 /**
- * Interface AttributeInterface.
- *
  * @template-extends ArrayAccess<int, mixed>
  */
 interface AttributeInterface extends

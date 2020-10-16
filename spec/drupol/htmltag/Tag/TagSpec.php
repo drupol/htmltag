@@ -156,10 +156,7 @@ class randomPrintableObject implements StringableInterface
         $this->storage = $value;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->storage;
     }

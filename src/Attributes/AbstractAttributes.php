@@ -8,9 +8,8 @@ use ArrayIterator;
 use drupol\htmltag\AbstractBaseHtmlTagObject;
 use drupol\htmltag\Attribute\AttributeFactoryInterface;
 
-/**
- * Class Attributes.
- */
+use function array_key_exists;
+
 abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements AttributesInterface
 {
     /**
@@ -23,7 +22,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
     /**
      * Stores the attribute data.
      *
-     * @var \drupol\htmltag\Attribute\AttributeInterface[]
+     * @var array<string, AttributesInterface>
      */
     private $storage = [];
 
@@ -41,17 +40,11 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         $this->import($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function append($key, ...$values): AttributesInterface
     {
         $this->storage += [
@@ -63,26 +56,17 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function contains($key, ...$values): bool
+    public function contains(string $key, ...$values): bool
     {
-        return $this->exists($key) && $this->storage[$key]->contains($values);
+        return $this->exists($key) && $this->storage[$key]->contains(...$values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function count()
     {
         return $this->getStorage()->count();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function delete(...$keys): AttributesInterface
+    public function delete(string ...$keys): AttributesInterface
     {
         foreach ($this->ensureStrings($this->ensureFlatArray($keys)) as $key) {
             unset($this->storage[$key]);
@@ -91,10 +75,7 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key, ...$values): bool
+    public function exists(string $key, ...$values): bool
     {
         if (!isset($this->storage[$key])) {
             return false;
@@ -105,25 +86,16 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
             $this->contains($key, $values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIterator()
     {
         return $this->getStorage();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStorage(): ArrayIterator
     {
         return new ArrayIterator(array_values($this->preprocess($this->storage)));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValuesAsArray(): array
     {
         $values = [];
@@ -135,9 +107,6 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         return $values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function import($data): AttributesInterface
     {
         foreach ($data as $key => $value) {
@@ -147,9 +116,6 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function merge(array ...$dataset): AttributesInterface
     {
         foreach ($dataset as $data) {
@@ -187,11 +153,11 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
 
     /**
      * @param int $key
-     * @param mixed|null $value
+     * @param mixed $value
      *
      * @return void
      */
-    public function offsetSet($key, $value = null)
+    public function offsetSet($key, $value)
     {
         $this->storage[$key] = $this->attributeFactory->getInstance((string) $key, $value);
     }
@@ -206,29 +172,20 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         unset($this->storage[$key]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preprocess(array $values, array $context = []): array
     {
         return $values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($key, ...$values): AttributesInterface
+    public function remove(string $key, ...$values): AttributesInterface
     {
-        if (isset($this->storage[$key])) {
-            $this->storage[$key]->remove($values);
+        if (array_key_exists($key, $this->storage)) {
+            $this->storage[$key]->remove(...$values);
         }
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(): string
     {
         $output = '';
@@ -240,23 +197,17 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         return $output;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function replace($key, $value, ...$replacements): AttributesInterface
+    public function replace(string $key, string $value, string ...$replacements): AttributesInterface
     {
         if (!$this->contains($key, $value)) {
             return $this;
         }
 
-        $this->storage[$key]->replace($value, $replacements);
+        $this->storage[$key]->replace($value, ...$replacements);
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         return serialize([
@@ -264,19 +215,13 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, ...$value): AttributesInterface
+    public function set(string $key, ...$value): AttributesInterface
     {
         $this->storage[$key] = $this->attributeFactory->getInstance($key, $value);
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unserialize($serialized)
     {
         $unserialize = unserialize($serialized);
@@ -291,13 +236,10 @@ abstract class AbstractAttributes extends AbstractBaseHtmlTagObject implements A
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function without(...$keys): AttributesInterface
+    public function without(string ...$keys): AttributesInterface
     {
         $attributes = clone $this;
 
-        return $attributes->delete($keys);
+        return $attributes->delete(...$keys);
     }
 }

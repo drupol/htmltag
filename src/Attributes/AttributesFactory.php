@@ -7,9 +7,6 @@ namespace drupol\htmltag\Attributes;
 use drupol\htmltag\Attribute\AttributeFactory;
 use ReflectionClass;
 
-/**
- * Class AttributesFactory.
- */
 class AttributesFactory implements AttributesFactoryInterface
 {
     /**
@@ -22,18 +19,12 @@ class AttributesFactory implements AttributesFactoryInterface
         '*' => Attributes::class,
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public static function build(
         array $attributes = []
     ) {
         return (new static())->getInstance($attributes);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getInstance(
         array $attributes = []
     ) {

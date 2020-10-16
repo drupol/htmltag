@@ -13,7 +13,7 @@ class CommentSpec extends ObjectBehavior
     public function it_can_create_a_comment()
     {
         $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, [], 'Hello world');
+        $this->beConstructedWith($attributes, null, 'Hello world');
         $this
             ->render()
             ->shouldReturn('<!--Hello world-->');
@@ -27,6 +27,6 @@ class CommentSpec extends ObjectBehavior
     public function let()
     {
         $attributes = AttributesFactory::build();
-        $this->beConstructedWith($attributes, [], '!--');
+        $this->beConstructedWith($attributes, null, '!--');
     }
 }
