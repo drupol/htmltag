@@ -1,14 +1,14 @@
-[![Latest Stable Version](https://img.shields.io/packagist/v/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
- [![GitHub stars](https://img.shields.io/github/stars/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
- [![Total Downloads](https://img.shields.io/packagist/dt/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
- [![Build Status](https://img.shields.io/travis/drupol/htmltag/master.svg?style=flat-square)](https://travis-ci.org/drupol/htmltag)
- [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/drupol/htmltag/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
- [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/drupol/htmltag/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/htmltag/?branch=master)
- [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/drupol/htmltag/master)](https://stryker-mutator.github.io)
- [![License](https://img.shields.io/packagist/l/drupol/htmltag.svg?style=flat-square)](https://packagist.org/packages/drupol/htmltag)
- [![Say Thanks!](https://img.shields.io/badge/Say-thanks-brightgreen.svg?style=flat-square)](https://saythanks.io/to/drupol)
- [![Donate!](https://img.shields.io/badge/Donate-Paypal-brightgreen.svg?style=flat-square)](https://paypal.me/drupol)
- 
+[![Latest Stable Version][latest stable version]][packagist collection]
+ [![GitHub stars][github stars]][packagist collection]
+ [![Total Downloads][total downloads]][packagist collection]
+ [![GitHub Workflow Status][github workflow status]][collection actions]
+ [![Scrutinizer code quality][code quality]][scrutinizer code quality]
+ [![Type Coverage][type coverage]][sheperd type coverage]
+ [![Code Coverage][code coverage]][scrutinizer code quality]
+ [![License][license]][packagist collection]
+ [![Donate!][donate github]][github sponsor]
+ [![Donate!][donate paypal]][paypal sponsor]
+
 # HTMLTag
 
 ## Description
@@ -354,3 +354,17 @@ Feel free to check them out in the `spec` directory. Run `composer phpspec` to t
 ## Contributing
 
 Feel free to contribute to this library by sending Github pull requests. I'm quite reactive :-)
+
+[packagist collection]: https://packagist.org/packages/htmltag/collection
+[latest stable version]: https://img.shields.io/packagist/v/htmltag/collection.svg?style=flat-square
+[github stars]: https://img.shields.io/github/stars/htmltag/collection.svg?style=flat-square
+[total downloads]: https://img.shields.io/packagist/dt/htmltag/collection.svg?style=flat-square
+[github workflow status]: https://img.shields.io/github/workflow/status/htmltag/collection/Continuous%20Integration?style=flat-square
+[code quality]: https://img.shields.io/scrutinizer/quality/g/htmltag/collection/master.svg?style=flat-square
+[scrutinizer code quality]: https://scrutinizer-ci.com/g/htmltag/collection/?branch=master
+[type coverage]: https://shepherd.dev/github/htmltag/collection/coverage.svg
+[sheperd type coverage]: https://shepherd.dev/github/htmltag/collection
+[code coverage]: https://img.shields.io/scrutinizer/coverage/g/htmltag/collection/master.svg?style=flat-square
+[license]: https://img.shields.io/packagist/l/htmltag/collection.svg?style=flat-square
+[donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
+[donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
